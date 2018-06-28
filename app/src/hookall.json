@@ -1,0 +1,965 @@
+{
+    "hookConfigs": [
+        {
+            "class_name": "javax.crypto.Cipher",
+            "method": "update",
+            "thisObject": "true",
+            "type": "Cipher"
+        },
+        {
+            "class_name": "javax.crypto.Cipher",
+            "method": "init",
+            "thisObject": "true",
+            "type": "Cipher"
+        },
+        {
+            "class_name": "javax.crypto.Cipher",
+            "method": "doFinal",
+            "thisObject": "true",
+            "type": "Cipher"
+        },
+        {
+            "class_name": "java.util.Timer",
+            "method": "scheduleImpl",
+            "thisObject": "true",
+            "type": "globals"
+        },
+        {
+            "class_name": "java.util.jar.JarVerifier",
+            "method": "verify",
+            "thisObject": "true",
+            "type": "globals"
+        },
+        {
+            "class_name": "java.lang.Thread",
+            "method": "sleep",
+            "thisObject": "true",
+            "type": "sleep"
+        },
+        {
+            "class_name": "java.lang.String",
+            "method": "split",
+            "thisObject": "true",
+            "type": "strings"
+        },
+        {
+            "class_name": "java.lang.String",
+            "method": "replaceFirst",
+            "thisObject": "true",
+            "type": "strings"
+        },
+        {
+            "class_name": "java.lang.String",
+            "method": "replaceAll",
+            "thisObject": "true",
+            "type": "strings"
+        },
+        {
+            "class_name": "java.lang.String",
+            "method": "replace",
+            "thisObject": "true",
+            "type": "strings"
+        },
+        {
+            "class_name": "java.lang.String",
+            "method": "endsWith",
+            "thisObject": "true",
+            "type": "strings"
+        },
+        {
+            "class_name": "java.lang.String",
+            "method": "compareToIgnoreCase",
+            "thisObject": "true",
+            "type": "Strings"
+        },
+        {
+            "class_name": "java.lang.String",
+            "method": "compareTo",
+            "thisObject": "true",
+            "type": "strings"
+        },
+        {
+            "class_name": "java.lang.Runtime",
+            "method": "nativeLoad",
+            "thisObject": "true",
+            "type": "nativeLoad"
+        },
+        {
+            "class_name": "java.lang.reflect",
+            "method": "invoke",
+            "thisObject": "true",
+            "type": "reflection"
+        },
+        {
+            "class_name": "java.lang.ProcessManager",
+            "method": "exec",
+            "thisObject": "true",
+            "type": "system"
+        },
+        {
+            "class_name": "java.lang.ClassLoader",
+            "method": "getResourceAsStream",
+            "thisObject": "true",
+            "type": "resource"
+        },
+        {
+            "class_name": "java.lang.Class",
+            "method": "forName",
+            "thisObject": "true",
+            "type": "Reflect"
+        },
+        {
+            "class_name": "java.io.FileOutputStream",
+            "method": "<init>",
+            "thisObject": "true",
+            "type": "file"
+        },
+        {
+            "class_name": "java.io.FileInputStream",
+            "method": "<init>",
+            "thisObject": "true",
+            "type": "file"
+        },
+        {
+            "class_name": "java.io.File",
+            "method": "File",
+            "thisObject": "true",
+            "type": "file"
+        },
+        {
+            "class_name": "java.io.File",
+            "method": "delete",
+            "thisObject": "true",
+            "type": "file"
+        },
+        {
+            "class_name": "java.io.File",
+            "method": "<init>",
+            "thisObject": "true",
+            "type": "file"
+        },
+        {
+            "class_name": "java.io.DataOutputStream",
+            "method": "writeBytes",
+            "thisObject": "true",
+            "type": "file"
+        },
+        {
+            "class_name": "dalvik.system.BaseDexClassLoader",
+            "method": "BaseDexClassLoader",
+            "thisObject": "true",
+            "type": "DexLoad"
+        },
+        {
+            "class_name": "com.android.server.WifiService",
+            "method": "setWifiEnabled",
+            "thisObject": "true",
+            "type": "setWifiEnabled"
+        },
+        {
+            "class_name": "com.android.server.wifi.WifiServiceImpl",
+            "method": "setWifiEnabled",
+            "thisObject": "true",
+            "type": "setWifiEnabled"
+        },
+        {
+            "class_name": "com.android.server.pm.PackageManagerService",
+            "method": "installPackageAsUser",
+            "thisObject": "true",
+            "type": "installPackageAsUser"
+        },
+        {
+            "class_name": "com.android.server.pm.PackageManagerService",
+            "method": "installPackage",
+            "thisObject": "true",
+            "type": "installPackage"
+        },
+        {
+            "class_name": "com.android.server.pm.PackageManagerService",
+            "method": "deletePackage",
+            "thisObject": "true",
+            "type": "deletePackage"
+        },
+        {
+            "class_name": "com.android.server.pm.PackageManagerService.AppDirObserver",
+            "method": "onEvent",
+            "thisObject": "true",
+            "type": "onEvent"
+        },
+        {
+            "class_name": "com.android.server.ConnectivityService",
+            "method": "setMobileDataEnabled",
+            "thisObject": "true",
+            "type": "setMobileDataEnabled"
+        },
+        {
+            "class_name": "com.android.providers.downloads.DownloadThread",
+            "method": "notifyDownloadCompleted",
+            "thisObject": "true",
+            "type": "notifyDownloadCompleted"
+        },
+        {
+            "class_name": "com.android.phone.PhoneInterfaceManager",
+            "method": "setDataEnabled",
+            "thisObject": "true",
+            "type": "setDataEnabled"
+        },
+        {
+            "class_name": "com.android.internal.telephony.ITelephony$Stub$Proxy",
+            "method": "silenceRinger",
+            "thisObject": "true",
+            "type": "silenceRinger"
+        },
+        {
+            "class_name": "com.android.internal.telephony.ITelephony$Stub$Proxy",
+            "method": "answerRingingCall",
+            "thisObject": "true",
+            "type": "answerRingingCall"
+        },
+        {
+            "class_name": "android.widget.TextView",
+            "method": "setTextSize",
+            "thisObject": "true",
+            "type": "setTextSize"
+        },
+        {
+            "class_name": "android.webkit.BrowserFrame",
+            "method": "stringByEvaluatingJavaScriptFromString",
+            "thisObject": "true",
+            "type": "fingerprint"
+        },
+        {
+            "class_name": "android.view.WindowManager",
+            "method": "addView",
+            "thisObject": "true",
+            "type": "addView"
+        },
+        {
+            "class_name": "android.telephony.TelephonyManager",
+            "method": "listen",
+            "thisObject": "true",
+            "type": "listen"
+        },
+        {
+            "class_name": "android.telephony.TelephonyManager",
+            "method": "getVoiceMailNumber",
+            "thisObject": "true",
+            "type": "getVoiceMailNumber"
+        },
+        {
+            "class_name": "android.telephony.TelephonyManager",
+            "method": "getSubscriberId",
+            "thisObject": "true",
+            "type": "getSubscriberId"
+        },
+        {
+            "class_name": "android.telephony.TelephonyManager",
+            "method": "getSimSerialNumber",
+            "thisObject": "true",
+            "type": "getSimSerialNumber"
+        },
+        {
+            "class_name": "android.telephony.TelephonyManager",
+            "method": "getLine1Number",
+            "thisObject": "true",
+            "type": "getLine1Number"
+        },
+        {
+            "class_name": "android.telephony.TelephonyManager",
+            "method": "getDeviceId",
+            "thisObject": "true",
+            "type": "getDeviceId"
+        },
+        {
+            "class_name": "android.telephony.SmsMessage",
+            "method": "getOriginatingAddress",
+            "thisObject": "true",
+            "type": "get OriginatingAddress"
+        },
+        {
+            "class_name": "android.telephony.SmsMessage",
+            "method": "getMessageBody",
+            "thisObject": "true",
+            "type": "get MessageBody"
+        },
+        {
+            "class_name": "android.telephony.SmsMessage",
+            "method": "getDisplayOriginatingAddress",
+            "thisObject": "true",
+            "type": "fingerprint"
+        },
+        {
+            "class_name": "android.telephony.SmsMessage",
+            "method": "getDisplayMessageBody",
+            "thisObject": "true",
+            "type": "getDisplayMessageBody"
+        },
+        {
+            "class_name": "android.telephony.SmsManager",
+            "method": "sendTextMessage",
+            "thisObject": "true",
+            "type": "send message"
+        },
+        {
+            "class_name": "android.telephony.SmsManager",
+            "method": "sendMultipartTextMessage",
+            "thisObject": "true",
+            "type": "sendMultipartTextMessage"
+        },
+        {
+            "class_name": "android.telephony.SmsManager",
+            "method": "sendDataMessage",
+            "thisObject": "true",
+            "type": "sendDataMessage"
+        },
+        {
+            "class_name": "android.provider.Settings.Secure",
+            "method": "setLocationProviderEnabled",
+            "thisObject": "true",
+            "type": "setLocationProviderEnabled"
+        },
+        {
+            "class_name": "android.provider.Settings.NameValueTable",
+            "method": "putString",
+            "thisObject": "true",
+            "type": "putString"
+        },
+        {
+            "class_name": "android.os.SystemVibrator",
+            "method": "vibrate",
+            "thisObject": "true",
+            "type": "vibrate"
+        },
+        {
+            "class_name": "android.os.SystemVibrator",
+            "method": "hasVibrator",
+            "thisObject": "true",
+            "type": "hasVibrator"
+        },
+        {
+            "class_name": "android.os.SystemProperties",
+            "method": "get",
+            "thisObject": "true",
+            "type": "getsystemProperties"
+        },
+        {
+            "class_name": "android.os.Process",
+            "method": "getUidForName",
+            "thisObject": "true",
+            "type": "getUidForName"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "setWifiEnabled",
+            "thisObject": "true",
+            "type": "setWifiEnabled"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "removeNetwork",
+            "thisObject": "true",
+            "type": "removeNetwork"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "reconnect",
+            "thisObject": "true",
+            "type": "reconnect"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "reassociate",
+            "thisObject": "true",
+            "type": "reassociate"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "getWifiState",
+            "thisObject": "true",
+            "type": "getWifiState"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "enableNetwork",
+            "thisObject": "true",
+            "type": "enableNetwork"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "disconnect",
+            "thisObject": "true",
+            "type": "disconnect"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "disableNetwork",
+            "thisObject": "true",
+            "type": "disableNetwork"
+        },
+        {
+            "class_name": "android.net.wifi.WifiManager",
+            "method": "addNetwork",
+            "thisObject": "true",
+            "type": "addNetwork"
+        },
+        {
+            "class_name": "android.net.NetworkInfo",
+            "method": "isConnected",
+            "thisObject": "true",
+            "type": "isConnected"
+        },
+        {
+            "class_name": "android.net.NetworkInfo",
+            "method": "getTypeName",
+            "thisObject": "true",
+            "type": "getTypeName"
+        },
+        {
+            "class_name": "android.net.LocalSocket",
+            "method": "connect",
+            "thisObject": "true",
+            "type": "connect"
+        },
+        {
+            "class_name": "android.net.ConnectivityManager",
+            "method": "setMobileDataEnabled",
+            "thisObject": "true",
+            "type": "setMobileDataEnabled"
+        },
+        {
+            "class_name": "android.media.MediaRecorder",
+            "method": "start",
+            "thisObject": "true",
+            "type": "start"
+        },
+        {
+            "class_name": "android.location.LocationManager",
+            "method": "requestLocationUpdates",
+            "thisObject": "true",
+            "type": "requestLocationUpdates"
+        },
+        {
+            "class_name": "android.location.LocationManager",
+            "method": "_requestLocationUpdates",
+            "thisObject": "true",
+            "type": "_requestLocationUpdates"
+        },
+        {
+            "class_name": "android.hardware.MediaRecorder",
+            "method": "start",
+            "thisObject": "true",
+            "type": "start"
+        },
+        {
+            "class_name": "android.hardware.MediaRecorder",
+            "method": "setOutputFile",
+            "thisObject": "true",
+            "type": "setOutputFile"
+        },
+        {
+            "class_name": "android.hardware.Camera",
+            "method": "takePicture",
+            "thisObject": "true",
+            "type": "takePicture"
+        },
+        {
+            "class_name": "android.graphics.Bitmap",
+            "method": "compress",
+            "thisObject": "true",
+            "type": "compress"
+        },
+        {
+            "class_name": "android.content.res.Resources",
+            "method": "openRawResource",
+            "thisObject": "true",
+            "type": "openRawResource"
+        },
+        {
+            "class_name": "android.content.res.AssetManager",
+            "method": "open",
+            "thisObject": "true",
+            "type": "open"
+        },
+        {
+            "class_name": "android.content.pm.PackageManager",
+            "method": "setComponentEnabledSetting",
+            "thisObject": "true",
+            "type": "setComponentEnabledSetting"
+        },
+        {
+            "class_name": "android.content.pm.IPackageManager.Stub.Proxy",
+            "method": "installPackage",
+            "thisObject": "true",
+            "type": "installPackage"
+        },
+        {
+            "class_name": "android.content.pm.IPackageManager.Stub.Proxy",
+            "method": "deletePackage",
+            "thisObject": "true",
+            "type": "deletePackage"
+        },
+        {
+            "class_name": "android.content.ContextWrapper",
+            "method": "startService",
+            "thisObject": "true",
+            "type": "startService"
+        },
+        {
+            "class_name": "android.content.ContextWrapper",
+            "method": "sendBroadcast",
+            "thisObject": "true",
+            "type": "sendBroadcast"
+        },
+        {
+            "class_name": "android.content.ContextWrapper",
+            "method": "registerReceiver",
+            "thisObject": "true",
+            "type": "registerReceiver"
+        },
+        {
+            "class_name": "android.content.ContentResolver",
+            "method": "updatemodifyapnreturntrue",
+            "thisObject": "true",
+            "type": "updatemodifyapnreturntrue"
+        },
+        {
+            "class_name": "android.content.ContentResolver",
+            "method": "update",
+            "thisObject": "true",
+            "type": "update"
+        },
+        {
+            "class_name": "android.content.ContentResolver",
+            "method": "registerContentObserver",
+            "thisObject": "true",
+            "type": "registerContentObserver"
+        },
+        {
+            "class_name": "android.content.ContentResolver",
+            "method": "query",
+            "thisObject": "true",
+            "type": "Read Message"
+        },
+        {
+            "class_name": "android.content.ContentResolver",
+            "method": "insert",
+            "thisObject": "true",
+            "type": "insert"
+        },
+        {
+            "class_name": "android.content.ContentResolver",
+            "method": "delete",
+            "thisObject": "true",
+            "type": "delete"
+        },
+        {
+            "class_name": "android.content.ContentResolver",
+            "method": "applyBatch",
+            "thisObject": "true",
+            "type": "applyBatch"
+        },
+        {
+            "class_name": "android.content.ClipboardManager",
+            "method": "setPrimaryClip",
+            "thisObject": "true",
+            "type": "setPrimaryClip"
+        },
+        {
+            "class_name": "android.content.ClipboardManager",
+            "method": "getPrimaryClipDescription",
+            "thisObject": "true",
+            "type": "getPrimaryClipDescription"
+        },
+        {
+            "class_name": "android.content.BroadcastReceiver",
+            "method": "setResultData",
+            "thisObject": "true",
+            "type": "setResultData"
+        },
+        {
+            "class_name": "android.content.BroadcastReceiver",
+            "method": "getResultData",
+            "thisObject": "true",
+            "type": "getResultData"
+        },
+        {
+            "class_name": "android.content.BroadcastReceiver",
+            "method": "abortBroadcast",
+            "thisObject": "true",
+            "type": "abortBroadcast"
+        },
+        {
+            "class_name": "android.app.NotificationManager",
+            "method": "notify",
+            "thisObject": "true",
+            "type": "notify"
+        },
+        {
+            "class_name": "android.app.NotificationManager",
+            "method": "cancelAll",
+            "thisObject": "true",
+            "type": "cancelAll"
+        },
+        {
+            "class_name": "android.app.NotificationManager",
+            "method": "cancel",
+            "thisObject": "true",
+            "type": "cancel"
+        },
+        {
+            "class_name": "android.app.DownloadManager",
+            "method": "enqueue",
+            "thisObject": "true",
+            "type": "enqueue"
+        },
+        {
+            "class_name": "android.app.Dialog",
+            "method": "show",
+            "thisObject": "true",
+            "type": "show toast"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getPermissionInfo",
+            "thisObject": "true",
+            "type": "getPermissionInfo"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getPermissionGroupInfo",
+            "thisObject": "true",
+            "type": "getPermissionGroupInfo"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getPackageInfo",
+            "thisObject": "true",
+            "type": "getPackageInfo"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getPackageGids",
+            "thisObject": "true",
+            "type": "getPackageGids"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getLaunchIntentForPackage",
+            "thisObject": "true",
+            "type": "getLaunchIntentForPackage"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getInstalledPackages",
+            "thisObject": "true",
+            "type": "getInstalledPackages"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getInstalledApplications",
+            "thisObject": "true",
+            "type": "getInstalledApplications"
+        },
+        {
+            "class_name": "android.app.ApplicationPackageManager",
+            "method": "getApplicationInfo",
+            "thisObject": "true",
+            "type": "getApplicationInfo"
+        },
+        {
+            "class_name": "android.app.AlarmManager",
+            "method": "setRepeating",
+            "thisObject": "true",
+            "type": "setRepeating"
+        },
+        {
+            "class_name": "android.app.AlarmManager",
+            "method": "setInexactRepeating",
+            "thisObject": "true",
+            "type": "setInexactRepeating"
+        },
+        {
+            "class_name": "android.app.AlarmManager",
+            "method": "set",
+            "thisObject": "true",
+            "type": "set"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordQuality",
+            "thisObject": "true",
+            "type": "setPasswordQuality"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordMinimumUpperCase",
+            "thisObject": "true",
+            "type": "setPasswordMinimumUpperCase"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordMinimumSymbols",
+            "thisObject": "true",
+            "type": "setPasswordMinimumSymbols"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordMinimumNumeric",
+            "thisObject": "true",
+            "type": "setPasswordMinimumNumeric"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordMinimumNonLetter",
+            "thisObject": "true",
+            "type": "setPasswordMinimumNonLetter"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordMinimumLowerCase",
+            "thisObject": "true",
+            "type": "setPasswordMinimumLowerCase"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordMinimumLetters",
+            "thisObject": "true",
+            "type": "setPasswordMinimumLetters"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordMinimumLength",
+            "thisObject": "true",
+            "type": "setPasswordMinimumLength"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordHistoryLength",
+            "thisObject": "true",
+            "type": "setPasswordHistoryLength"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setPasswordExpirationTimeout",
+            "thisObject": "true",
+            "type": "setPasswordExpirationTimeout"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setMaximumTimeToLock",
+            "thisObject": "true",
+            "type": "setMaximumTimeToLock"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "setMaximumFailedPasswordsForWipe",
+            "thisObject": "true",
+            "type": "setMaximumFailedPasswordsForWipe"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "resetPassword",
+            "thisObject": "true",
+            "type": "resetPassword"
+        },
+        {
+            "class_name": "android.app.admin.DevicePolicyManager",
+            "method": "lockNow",
+            "thisObject": "true",
+            "type": "lockNow"
+        },
+        {
+            "class_name": "android.app.ActivityThread",
+            "method": "handleStopService",
+            "thisObject": "true",
+            "type": "handleStopService"
+        },
+        {
+            "class_name": "android.app.ActivityThread",
+            "method": "handleCreateService",
+            "thisObject": "true",
+            "type": "handleCreateService"
+        },
+        {
+            "class_name": "android.app.ActivityManagerProxy",
+            "method": "broadcastIntent",
+            "thisObject": "true",
+            "type": "broadcastIntent"
+        },
+        {
+            "class_name": "android.app.ActivityManager",
+            "method": "restartPackage",
+            "thisObject": "true",
+            "type": "restartPackage"
+        },
+        {
+            "class_name": "android.app.ActivityManager",
+            "method": "killBackgroundProcesses",
+            "thisObject": "true",
+            "type": "killBackgroundProcesses"
+        },
+        {
+            "class_name": "android.app.ActivityManager",
+            "method": "getRunningTasks",
+            "thisObject": "true",
+            "type": "getRunningTasks"
+        },
+        {
+            "class_name": "android.app.ActivityManager",
+            "method": "getRunningServices",
+            "thisObject": "true",
+            "type": "getRunningServices"
+        },
+        {
+            "class_name": "android.app.ActivityManager",
+            "method": "getRunningExternalApplications",
+            "thisObject": "true",
+            "type": "getRunningExternalApplications"
+        },
+        {
+            "class_name": "android.app.ActivityManager",
+            "method": "getRunningAppProcesses",
+            "thisObject": "true",
+            "type": "getRunningAppProcesses"
+        },
+        {
+            "class_name": "android.app.Activity",
+            "method": "startActivityForResult",
+            "thisObject": "true",
+            "type": "startActivity"
+        },
+        {
+            "class_name": "android.accounts.AccountManager",
+            "method": "getAccountsByType",
+            "thisObject": "true",
+            "type": "getAccountsByType"
+        },
+        {
+            "class_name": "android.accounts.AccountManager",
+            "method": "getAccounts",
+            "thisObject": "true",
+            "type": "getAccounts"
+        },
+        {
+            "class_name": "android.accessibilityservice.AccessibilityService$1",
+            "method": "onAccessibilityEvent",
+            "thisObject": "true",
+            "type": "onAccessibilityEvent"
+        },
+        {
+            "class_name": "android.app.Activity",
+            "method": "startActivity",
+            "thisObject": "false",
+            "type": "startActivity"
+        },
+        {
+            "class_name": "java.lang.Runtime",
+            "method": "exec",
+            "thisObject": "false",
+            "type": "exec"
+        },
+        {
+            "class_name": "java.io.FileOutputStream",
+            "method": "write",
+            "thisObject": "false",
+            "type": "write"
+        },
+        {
+            "class_name": "android.location.Location",
+            "method": "getLatitude",
+            "thisObject": "false",
+            "type": "getLatitude"
+        },
+        {
+            "class_name": "android.location.Location",
+            "method": "getLongitude",
+            "thisObject": "false",
+            "type": "getLongitude"
+        },
+        {
+            "class_name": "libcore.io.IoBridge",
+            "method": "open",
+            "thisObject": "false",
+            "type": "open"
+        },
+        {
+            "class_name": "android.util.Base64",
+            "method": "decode",
+            "thisObject": "false",
+            "type": "decode"
+        },
+        {
+            "class_name": "android.util.Base64",
+            "method": "encode",
+            "thisObject": "false",
+            "type": "encode"
+        },
+        {
+            "class_name": "android.util.Base64",
+            "method": "encodeToString",
+            "thisObject": "false",
+            "type": "encodeToString"
+        },
+        {
+            "class_name": "dalvik.system.DexFile",
+            "method": "loadDex",
+            "thisObject": "false",
+            "type": "loadDex"
+        },
+        {
+            "class_name": "dalvik.system.BaseDexClassLoader",
+            "method": "findResources",
+            "thisObject": "false",
+            "type": "findResources"
+        },
+        {
+            "class_name": "dalvik.system.DexFile",
+            "method": "loadClass",
+            "thisObject": "false",
+            "type": "loadClass"
+        },
+        {
+            "class_name": "java.net.URL",
+            "method": "openConnection",
+            "thisObject": "false",
+            "type": "openConnection"
+        },
+        {
+            "class_name": "org.apache.http.impl.client.AbstractHttpClient",
+            "method": "execute",
+            "thisObject": "false",
+            "type": "execute"
+        },
+        {
+            "class_name": "android.os.Debug",
+            "method": "isDebuggerConnected",
+            "thisObject": "false",
+            "type": "isDebuggerConnected"
+        },
+        {
+            "class_name": "java.io.FileInputStream",
+            "method": "read",
+            "thisObject": "false",
+            "type": "read"
+        },
+        {
+            "class_name": "java.io.FileOutputStream",
+            "method": "write",
+            "thisObject": "false",
+            "type": "write"
+        },
+        {
+            "class_name": "java.lang.ProcessBuilder",
+            "method": "start",
+            "thisObject": "false",
+            "type": "start"
+        },
+        {
+            "class_name": "android.os.Process",
+            "method": "killProcess",
+            "thisObject": "false",
+            "type": "killProcess"
+        }
+    ],
+    "trace": false
+}
