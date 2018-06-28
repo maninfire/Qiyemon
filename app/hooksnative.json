@@ -1,0 +1,11 @@
+{
+    "hookConfigs": [
+        {
+            "so_name":"",
+            "method":"",
+            "this":"",
+            "Funtion":""
+        }
+    ], 
+    "trace": false
+}
