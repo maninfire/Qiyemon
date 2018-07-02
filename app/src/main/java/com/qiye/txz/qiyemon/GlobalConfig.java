@@ -6,7 +6,7 @@ package com.qiye.txz.qiyemon;
 
 public   class GlobalConfig {
     public static String Inject_PackageName = "";                                   //待注入的包名
-    public static String Inject_SoPath = "";                                        //待注入的框架so的完整路径,此处不能在sd卡
+    public static String Inject_SoPath = "/data/local/tmp/";                                        //待注入的框架so的完整路径,此处不能在sd卡
 
     public static String Inject_ClassName = "java.lang.System";                   //查找我们要调用的System.load
     public static String Inject_Invoke_FunName = "load";

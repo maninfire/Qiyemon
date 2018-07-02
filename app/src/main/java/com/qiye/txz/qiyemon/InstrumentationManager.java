@@ -75,6 +75,7 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
             return;
         }else if(lpparam.isFirstApplication && !OS_APPS.contains(lpparam.packageName))
         {
+            nativeloadhook(lpparam);
             Logger.PACKAGENAME = lpparam.packageName;
             try {
                 instrumentApp();

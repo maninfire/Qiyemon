@@ -1,5 +1,7 @@
 LOCAL_PATH := $(call my-dir)
-
+APP_ABI:=armeabi
+NDK_TOOLCHAIN_VERSION = 4.8
+APP_CPPFLAGS +=-std=c++11
 include $(CLEAR_VARS)
 LOCAL_MODULE:= substrate-dvm
 LOCAL_SRC_FILES := libsubstrate-dvm.so

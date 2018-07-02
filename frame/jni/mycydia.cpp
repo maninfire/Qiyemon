@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "string.h"
 #include "substrate.h"
 #include <android/log.h>
 #include <unistd.h>
@@ -64,7 +65,7 @@ void* get_module_base(int pid, const char* module_name)
  *  第二行: 要挂钩(Hook)的so名字,这里加载应用默认的库不需要完整路径,如果该应用采用其它方式加载则需要完整路径
  *  第三行: 实现实际hook功能的so,这个so里面包含了和框架so约定的导出函数
  */
-void loadConfig()
+void loadConfig()//这里通过配置文件读取G_packageName和targetso,hook_sopath的路径
 {	
 	FILE *fp;
 	fp = fopen("/sdcard/my_hookso.txt", "r");
@@ -97,7 +98,6 @@ void loadConfig()
 		if(line != NULL)
 		{
 			strcpy(hook_sopath, line);
-			
 		}else
 		{
 			DUALLOGE("[-] read file hook_sopath set failed!\n");
@@ -120,6 +120,7 @@ void* get_remote_addr(int target_pid, const char* module_name, void* local_addr)
 	remote_handle = get_module_base(target_pid, module_name);	//得到模块在远程进程的基址
 	DUALLOGD("[+] get_module_base: local[%08x], remote[%08x]\n", local_handle, remote_handle);
 	void* ret_addr = (void *)((uint32_t)local_addr + (uint32_t)remote_handle - (uint32_t)local_handle);	//根据地址=基址+偏移得到在远程空间的实际地址
+	//void* ret_addr = (void *)((unsigned long)local_addr + (unsigned long)remote_handle - (unsigned long)local_handle);	
 	#if defined(__i386__)
 		if (!strcmp(module_name, "/system/lib/libc.so"))
 		{

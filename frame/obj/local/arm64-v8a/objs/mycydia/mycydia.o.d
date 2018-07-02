@@ -1,8 +1,8 @@
-D:/ubuntushare/native/obj/local/arm64-v8a/objs/mycydia/mycydia.o: \
-  D:/ubuntushare/native/jni/mycydia.cpp \
-  D:/ubuntushare/native/jni/substrate.h \
-  D:/ubuntushare/native/jni/mycydia.h
+G:/QLDownload/Qiyemon/frame/obj/local/arm64-v8a/objs/mycydia/mycydia.o: \
+  G:/QLDownload/Qiyemon/frame/jni/mycydia.cpp \
+  G:/QLDownload/Qiyemon/frame/jni/substrate.h \
+  G:/QLDownload/Qiyemon/frame/jni/mycydia.h
 
-D:/ubuntushare/native/jni/substrate.h:
+G:/QLDownload/Qiyemon/frame/jni/substrate.h:
 
-D:/ubuntushare/native/jni/mycydia.h:
+G:/QLDownload/Qiyemon/frame/jni/mycydia.h:
