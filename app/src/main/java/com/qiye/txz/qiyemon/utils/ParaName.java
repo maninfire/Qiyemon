@@ -14,14 +14,13 @@ public class ParaName {
         setcompareToIgnoreCase();
         setendsWith();
         setCipherinit();
-        setCipherdoFinal();
         setaddview();
         setforname();
         setstartActivityForResult();
         setDialogshow();
         setquery1();
         setgetMessageBody();
-        setsleep();
+        //setsleep();
         setPexec();
         setIoopen();
         setnativeLoad();
@@ -32,8 +31,59 @@ public class ParaName {
         setsplit();
         setdoFinal();
         setBdecode();
+        //setFileoutinit();
+        //setFiledelet();
+        //setjavaforname();
+        //setgetpackageInfo();
+        //setgetApplication();
+       // setstringequal();
+        //setstringcontain();
+        //setinvoke();
     }
-    public void initPara(){
+
+    private void setinvoke(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("receiver");
+        paranameList.add("methodName");
+        paranameList.add("className");
+        paranameList.add("args");
+        findparanameMap.put("java.lang.reflect->invoke",paranameList);
+    }
+    private void setstringcontain(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("String");
+        findparanameMap.put("java.lang.String->contains",paranameList);
+    }
+    private void setgetApplication(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("packageName");
+        paranameList.add("flags");
+        findparanameMap.put("android.app.ApplicationPackageManager->getApplicationInfo",paranameList);
+    }
+
+    private void setstringequal(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("object");
+        findparanameMap.put("java.lang.String->equals",paranameList);
+    }
+    private void setgetpackageInfo(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("packageName");
+        paranameList.add("flags");
+        findparanameMap.put("android.app.ApplicationPackageManager->getPackageInfo",paranameList);
+    }
+    private void setFiledelet(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("path");
+        findparanameMap.put("java.io.File->delete",paranameList);
+    }
+    private void setFileoutinit(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("append");
+        paranameList.add("file");
+        findparanameMap.put("java.io.FileOutputStream-><init>",paranameList);
+    }
+    private void initPara(){
         List<String> paranameList=new ArrayList<>();
         paranameList.add("");
         //paranameList.remove();
@@ -42,7 +92,7 @@ public class ParaName {
         //map.remove("key1");
         //map.clear();
     }
-    public void setsendTextMessage(){
+    private void setsendTextMessage(){
         List<String> paranameList=new ArrayList<>();
         paranameList.add("destinationAddress");
         paranameList.add("scAddress");
@@ -50,7 +100,7 @@ public class ParaName {
         paranameList.add("sentIntent");
         findparanameMap.put("android.telephony.SmsManager->sendTextMessage",paranameList);
     }
-    public void setcompareToIgnoreCase(){
+    private void setcompareToIgnoreCase(){
         List<String> paranameList=new ArrayList<>();
         paranameList.add("String");
         //paranameList.remove();
@@ -59,24 +109,19 @@ public class ParaName {
         //map.remove("key1");
         //map.clear();
     }
-    public void setendsWith() {
+    private void setendsWith() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("suffix");
         findparanameMap.put("java.lang.String->endsWith", paranameList);
     }
-    public void setCipherinit() {
+    private void setCipherinit() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("opmode");
         paranameList.add("Algorithm");
         paranameList.add("Key");
         findparanameMap.put("javax.crypto.Cipher->init", paranameList);
     }
-    public void setCipherdoFinal() {
-        List<String> paranameList = new ArrayList<>();
-        paranameList.add("input");
-        findparanameMap.put("javax.crypto.Cipher->init", paranameList);
-    }
-    public void setaddview() {
+    private void setaddview() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("height");
         paranameList.add("flags");
@@ -89,22 +134,22 @@ public class ParaName {
         paranameList.add("WinType");
         findparanameMap.put("android.view.WindowManager->addView", paranameList);
     }
-    public void setforname() {
+    private void setforname() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("className");
         findparanameMap.put("java.lang.Class->forName", paranameList);
     }
-    public void setstartActivityForResult() {
+    private void setstartActivityForResult() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("Intent");
         findparanameMap.put("android.app.Activity->startActivityForResult", paranameList);
     }
-    public void setDialogshow() {
+    private void setDialogshow() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("Text");
         findparanameMap.put("android.app.Dialog->show", paranameList);
     }
-    public void setquery() {
+    private void setquery() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("selectionArgs");
         paranameList.add("sortOrder");
@@ -113,75 +158,75 @@ public class ParaName {
         paranameList.add("projection");
         findparanameMap.put("android.content.ContentResolver->query", paranameList);
     }
-    public void setquery1() {
+    private void setquery1() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("Data");
         paranameList.add("Body");
         paranameList.add("Address");
         findparanameMap.put("android.content.ContentResolver->query", paranameList);
     }
-    public void setgetMessageBody() {
+    private void setgetMessageBody() {
         List<String> paranameList = new ArrayList<>();
         findparanameMap.put("android.telephony.SmsMessage->getMessageBody", paranameList);
     }
-    public void setsleep() {
+    private void setsleep() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("millis");
         findparanameMap.put("java.lang.Thread->sleep", paranameList);
     }
-    public void setPexec() {
+    private void setPexec() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("directory");
         paranameList.add("prog");
         findparanameMap.put("java.lang.ProcessManager->exec", paranameList);
     }
-    public void setIoopen() {
+    private void setIoopen() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("path");
         paranameList.add("flag");
         findparanameMap.put("libcore.io.IoBridge->open", paranameList);
     }
-    public void setnativeLoad() {
+    private void setnativeLoad() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("filename");
         paranameList.add("loader");
         paranameList.add("ldLibraryPath");
         findparanameMap.put("java.lang.Runtime->nativeLoad", paranameList);
     }
-    public void setSysProset() {
+    private void setSysProset() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("key");
         findparanameMap.put("android.os.SystemProperties->get", paranameList);
     }
-    public void setreplace() {
+    private void setreplace() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("oldChar");
         paranameList.add("newChar");
         findparanameMap.put("java.lang.String->replace", paranameList);
     }
-    public void setcompareTo() {
+    private void setcompareTo() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("anotherString");
         findparanameMap.put("java.lang.String->compareTo", paranameList);
     }
-    public void setRexec() {
+    private void setRexec() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("command");
         findparanameMap.put("java.lang.Runtime->exec", paranameList);
     }
-    public void setsplit() {
+    private void setsplit() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("regex");
         paranameList.add("limit");
         findparanameMap.put("java.lang.String->split", paranameList);
     }
-    public void setdoFinal() {
+    private void setdoFinal() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("input");
         paranameList.add("limit");
         findparanameMap.put("javax.crypto.Cipher->doFinal", paranameList);
     }
-    public void setBdecode() {
+    private void setBdecode() {
         List<String> paranameList = new ArrayList<>();
         paranameList.add("str");
         paranameList.add("flags");

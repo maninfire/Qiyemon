@@ -37,23 +37,23 @@ public class ParseGeneratorNotype {
 		Object returnObj=null;
 
 		if(obj instanceof byte[])
-			returnObj = byteArrayParse(obj);
-		else if(obj instanceof HttpRequestBase)
-			returnObj = httpRequestBaseParse(obj);
-		else if(obj instanceof HttpResponse)
-			returnObj = httpResponseParse(obj);
-		else if(obj instanceof HttpURLConnection || obj instanceof HttpsURLConnection )
-			returnObj = URLConnectionParse(obj);
-		else if(obj instanceof URL)
-			returnObj = URLParse(obj);
-		else if(obj instanceof MessageDigest)
-			returnObj = messageDigestParse(obj);
-		else if(obj instanceof Cipher)
-			returnObj = cipherParse(obj);
-		else if(obj instanceof Intent)
-			returnObj = intentParse(obj);
+			returnObj = byteArrayParse(obj);  //////
+		//else if(obj instanceof HttpRequestBase)
+			//returnObj = httpRequestBaseParse(obj);
+		//else if(obj instanceof HttpResponse)
+			//returnObj = httpResponseParse(obj);
+		//else if(obj instanceof HttpURLConnection || obj instanceof HttpsURLConnection )
+			//returnObj = URLConnectionParse(obj);
+		//else if(obj instanceof URL)
+			//returnObj = URLParse(obj);
+		//else if(obj instanceof MessageDigest)
+			//returnObj = messageDigestParse(obj);
+		//else if(obj instanceof Cipher)
+			//returnObj = cipherParse(obj);
+		//else if(obj instanceof Intent)
+			//returnObj = intentParse(obj);
 		else
-			returnObj = genericParse(obj);
+			returnObj = genericParse(obj);////
 
 		return returnObj;
 	}
@@ -79,7 +79,8 @@ public class ParseGeneratorNotype {
 
 	private static Object genericParse(Object obj) {
 		try {
-			return new JSONObject(gson.toJson(obj));
+			//return new JSONObject(gson.toJson(obj));
+			return obj;
 		} catch (Exception e) {
 			try {
 				return new JSONArray(gson.toJson(obj));
@@ -178,35 +179,34 @@ public class ParseGeneratorNotype {
 		return hookData;
 	}
 
-    public static JSONObject parseArgs(MethodHookParam param, JSONObject hookJson)
+	public static JSONObject addHookDataJson(JSONObject extraData,MethodHookParam param, String type) throws JSONException
+	{
+		//JSONObject hookData= new JSONObject();
+		JSONObject hookData=extraData;
+		hookData.put("PID", Process.myPid());
+		hookData.put("TID", Process.myTid());
+		hookData.put("UID", Process.myUid());
+		hookData.put("Method",param.method.getDeclaringClass().getName()+"->"+param.method.getName());
+		//hookData.put("method", param.method.getName());
+		hookData.put("Function", type);
+		hookData.put("Time", System.currentTimeMillis());
+		return hookData;
+	}
+
+    public static JSONObject parseArgs(MethodHookParam param, JSONObject hookJson,List<String> paraname)
     {
-        //ParaName pn=new ParaName();
         JSONObject args =  new JSONObject();
-        List<String> paraname=null;
-		try{
-			//args.put("this",param.thisObject.toString());
-		}catch (Exception e){
-			Logger.logShell("args errorll: " + e.getMessage()+" "+hookJson.toString());
-		}
-        for (String method : pn.findparanameMap.keySet()) {
-            //System.out.println(method + " ：" + pn.findparanameMap.get(method));
-            if(method.equals(param.method.getDeclaringClass().getName()+"->"+param.method.getName())){
-                paraname=pn.findparanameMap.get(method);
-            }
-        }
         int i=0;
         for (Object object : (Object[]) param.args) {
             try {
                 if(object!=null)
                     if(paraname!=null){
-                		//Log.d("testtest",paraname.get(i));
                         args.put(paraname.get(i), ParseGeneratorNotype.parse(object));
                     }else{
                         args.put("", ParseGeneratorNotype.parse(object));
                     }
                 else{
 					if(paraname!=null){
-						//Log.d("testtest",paraname.get(i));
 						args.put(paraname.get(i),"");
 					}else{
 						args.put("","");

@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
@@ -34,6 +35,7 @@ public class Logger {
 	public static String LOG_FILE ="/360Qiyemon.log";
 	public static String LOG_FILE_OLD ="/360Qiyemon_old.log";
 	public static String PACKAGENAME;
+	private static ParaName logpn=new ParaName();
 
 	public static PrintWriter getLogWriter()
 	{
@@ -141,14 +143,23 @@ public class Logger {
 	
 	public static void logGenericMethod(MethodHookParam param, boolean mThisObject, /*String*/ String mType) throws JSONException {
 		//JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
-		JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
-        if(param.args!=null)
-            hookJson.put("Paramaters", ParseGeneratorNotype.parseArgs(param,hookJson));
-        if(param.getResult()!=null)
-			hookJson.put("result", ParseGeneratorNotype.parseResults(param,hookJson));
-		if(param.thisObject!=null && mThisObject)
-			hookJson.put("this",ParseGeneratorNotype.parseThis(param,hookJson));
+		JSONObject hookJson = new JSONObject();
+		List<String> paraname=null;
+		for (String method : logpn.findparanameMap.keySet()) {
+			//System.out.println(method + " ：" + pn.findparanameMap.get(method));
+			if(method.equals(param.method.getDeclaringClass().getName()+"->"+param.method.getName())){
+				paraname=logpn.findparanameMap.get(method);
+			}
+		}
 
+        if(param.args!=null)//&&paraname!=null
+            hookJson.put("Paramaters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
+        if(param.getResult()!=null)
+			//hookJson.put("result",param.getResult());
+			hookJson.put("result", ParseGeneratorNotype.parseResults(param,hookJson));
+		//if(param.thisObject!=null && mThisObject)
+			//hookJson.put("this",ParseGeneratorNotype.parseThis(param,hookJson));
+		hookJson=ParseGeneratorNotype.addHookDataJson(hookJson,param,mType);
 		Logger.logHook(hookJson);
 	}
 	

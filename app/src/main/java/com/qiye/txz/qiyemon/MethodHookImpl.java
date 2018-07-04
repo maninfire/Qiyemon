@@ -7,6 +7,7 @@ import android.os.Process;
 import com.qiye.txz.qiyemon.utils.Logger;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 
 
 public class MethodHookImpl extends XC_MethodHook {
@@ -44,11 +45,16 @@ public class MethodHookImpl extends XC_MethodHook {
 			try {
 				if (Process.myUid() <= 0)
 					return;
-				
 				if (InstrumentationManager.TRACE)
+				{
+					//XposedBridge.log("true");
 					traceMethod(param);      //这里设置了false
+				}
 				else
+				{
+					//XposedBridge.log("false");
 					monitorMethod(param);
+				}
 			} catch (Throwable ex) {
 				throw ex;
 			}
