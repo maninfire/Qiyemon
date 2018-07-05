@@ -31,14 +31,67 @@ public class ParaName {
         setsplit();
         setdoFinal();
         setBdecode();
-        //setFileoutinit();
-        //setFiledelet();
-        //setjavaforname();
-        //setgetpackageInfo();
-        //setgetApplication();
-       // setstringequal();
-        //setstringcontain();
-        //setinvoke();
+        setFileoutinit();
+        setFiledelet();
+        setgetpackageInfo();
+        setgetApplication();
+        setstringequal();
+        setstringcontain();
+        setinvoke();
+        setreplaceall();
+        setregisterReceiver();
+        setgetresourceAsStream();
+        sethandleCreateService();
+        setAssetMangeropen();
+        sethandleStopService();
+        setstartservice();
+        setrequestLocationUpdates();
+    }
+
+    private void setrequestLocationUpdates(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("provider");
+        findparanameMap.put("android.location.LocationManager->requestLocationUpdates",paranameList);
+    }
+
+    private void setstartservice(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("Intent");
+        findparanameMap.put("android.content.ContextWrapper->startService",paranameList);
+    }
+    private void sethandleStopService(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("token");
+        findparanameMap.put("android.app.ActivityThread->handleStopService",paranameList);
+    }
+    private void setAssetMangeropen(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("fileName");
+        findparanameMap.put("android.content.res.AssetManager->open",paranameList);
+    }
+    private void sethandleCreateService(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("data");
+        paranameList.add("resourceName");
+        findparanameMap.put("android.app.ActivityThread->handleCreateService",paranameList);
+    }
+    private void setgetresourceAsStream(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("md5");
+        paranameList.add("resourceName");
+        findparanameMap.put("java.lang.ClassLoader->getResourceAsStream",paranameList);
+    }
+    private void setregisterReceiver(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("IntentFilter");
+        paranameList.add("BroadcastReceiver");
+        findparanameMap.put("android.content.ContextWrapper->registerReceiver",paranameList);
+    }
+    private void setreplaceall(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("regularExpression");
+        paranameList.add("replacement");
+        findparanameMap.put("java.lang.String->replaceAll",paranameList);
     }
 
     private void setinvoke(){

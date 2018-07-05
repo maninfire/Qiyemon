@@ -153,7 +153,7 @@ public class Logger {
 		}
 
         if(param.args!=null)//&&paraname!=null
-            hookJson.put("Paramaters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
+            hookJson.put("Parameters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
         if(param.getResult()!=null)
 			//hookJson.put("result",param.getResult());
 			hookJson.put("result", ParseGeneratorNotype.parseResults(param,hookJson));

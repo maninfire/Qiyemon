@@ -38,18 +38,18 @@ public class ParseGeneratorNotype {
 
 		if(obj instanceof byte[])
 			returnObj = byteArrayParse(obj);  //////
-		//else if(obj instanceof HttpRequestBase)
-			//returnObj = httpRequestBaseParse(obj);
-		//else if(obj instanceof HttpResponse)
-			//returnObj = httpResponseParse(obj);
+		else if(obj instanceof HttpRequestBase)
+			returnObj = httpRequestBaseParse(obj);
+		else if(obj instanceof HttpResponse)
+			returnObj = httpResponseParse(obj);
 		//else if(obj instanceof HttpURLConnection || obj instanceof HttpsURLConnection )
 			//returnObj = URLConnectionParse(obj);
-		//else if(obj instanceof URL)
-			//returnObj = URLParse(obj);
-		//else if(obj instanceof MessageDigest)
-			//returnObj = messageDigestParse(obj);
-		//else if(obj instanceof Cipher)
-			//returnObj = cipherParse(obj);
+		else if(obj instanceof URL)
+			returnObj = URLParse(obj);
+		else if(obj instanceof MessageDigest)
+			returnObj = messageDigestParse(obj);
+		else if(obj instanceof Cipher)
+			returnObj = cipherParse(obj);
 		//else if(obj instanceof Intent)
 			//returnObj = intentParse(obj);
 		else
@@ -72,7 +72,8 @@ public class ParseGeneratorNotype {
 
 	private static JSONObject cipherParse(Object obj) throws JSONException {
 		JSONObject json=new JSONObject();
-		JSONObject cipher = new JSONObject(gson.toJson(obj));
+		//JSONObject cipher =new JSONObject(gson.toJson(obj));
+		JSONObject cipher =(JSONObject)obj;
 		json.put("mode", cipher.get("mode"));
 		return json;
 	}
