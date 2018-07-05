@@ -1,7 +1,6 @@
 package com.qiye.txz.qiyemon;
 
 import android.content.pm.ApplicationInfo;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.qiye.txz.qiyemon.utils.Files;
@@ -19,12 +18,10 @@ import java.util.Set;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 
 public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHookZygoteInit {
@@ -103,6 +100,11 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
         for (HookConfig hookConfig : instrumentationConfiguration.hookConfigs) {
             hook(new MethodHookImpl(hookConfig.class_name,hookConfig.method,hookConfig.thisObject,hookConfig.type));
         }
+        hookextra(new HKequals("java.lang.String","equals",true,"equals"));
+        hookextra(new HKtoString("java.lang.String","toString",true,"toString"));
+        //hookextra(new HKtoString("java.lang.String","startsWith",true,"toString"));
+        //hookextra(new HKtoString("java.lang.String","indexOf",true,"toString"));
+        //hookextra(new HKtoString("java.lang.String","contains",true,"toString"));
     }
 
     public class InstrumentationConfiguration {
@@ -122,6 +124,9 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
     private static void hook(MethodHookImpl methodHook) {
         hook(methodHook, null);
     }
+    private static void hookextra(HKmethod methodHook) {
+        hookextra(methodHook, null);
+    }
 
     private static void hook(final MethodHookImpl methodHook, ClassLoader classLoader) {
         try {
@@ -129,6 +134,34 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
             // Create hook method
             XC_MethodHook xcMethodHook = methodHook;
 
+            // Find hook class
+            Class<?> hookClass = findClass(methodHook.getClassName(), classLoader);
+            if (hookClass == null) {
+                String message = String.format("Hook-Class not found: %s", methodHook.getClassName());
+                Logger.logError(message);
+                return;
+            }
+
+            // Add hook
+            if (methodHook.getMethodName() == null) {
+                for (Constructor<?> constructor : hookClass.getDeclaredConstructors()){
+                    XposedBridge.hookMethod(constructor, xcMethodHook);
+                }
+            } else{
+                for (Method method : hookClass.getDeclaredMethods())
+                    if (method.getName().equals(methodHook.getMethodName()))
+                        XposedBridge.hookMethod(method, xcMethodHook);
+            }
+
+        } catch (Throwable ex) {
+
+        }
+    }
+
+    private static void hookextra(final HKmethod methodHook, ClassLoader classLoader) {
+        try {
+
+            XC_MethodHook xcMethodHook = (XC_MethodHook)methodHook;
             // Find hook class
             Class<?> hookClass = findClass(methodHook.getClassName(), classLoader);
             if (hookClass == null) {

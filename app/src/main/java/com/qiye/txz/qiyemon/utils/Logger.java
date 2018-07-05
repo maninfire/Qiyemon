@@ -67,6 +67,12 @@ public class Logger {
         //XposedBridge.log("loghook");
 		log(LOGTAG_WORKFLOW+PACKAGENAME+":"+hookData.toString());
 	}
+	public static void logHookextra(String hookData){
+		//XposedBridge.log(LOGTAG_WORKFLOW+PACKAGENAME+":"+hookData.toString());
+		//XposedBridge.log("loghook");
+		//System.out.println(ho);
+		log(LOGTAG_WORKFLOW+":"+hookData);
+	}
 
 	public static void logShell(String message){
 		//XposedBridge.log(LOGTAG_SHELL+PACKAGENAME+":"+message);
@@ -153,7 +159,14 @@ public class Logger {
 		}
 
         if(param.args!=null)//&&paraname!=null
-            hookJson.put("Parameters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
+        	if(param.method.getName().equals("equals")) {
+				XposedBridge.log("specialwork");
+				hookJson.put("Parameters", ParseGeneratorNotype.parseArgsspecial(param, hookJson, paraname));
+			}
+			else{
+				XposedBridge.log("specialnotwork");
+				hookJson.put("Parameters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
+			}
         if(param.getResult()!=null)
 			//hookJson.put("result",param.getResult());
 			hookJson.put("result", ParseGeneratorNotype.parseResults(param,hookJson));

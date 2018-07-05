@@ -46,8 +46,8 @@ public class ParseGeneratorNotype {
 			//returnObj = URLConnectionParse(obj);
 		else if(obj instanceof URL)
 			returnObj = URLParse(obj);
-		else if(obj instanceof MessageDigest)
-			returnObj = messageDigestParse(obj);
+		//else if(obj instanceof MessageDigest)
+			//returnObj = messageDigestParse(obj);
 		else if(obj instanceof Cipher)
 			returnObj = cipherParse(obj);
 		//else if(obj instanceof Intent)
@@ -194,6 +194,33 @@ public class ParseGeneratorNotype {
 		return hookData;
 	}
 
+    public static JSONObject parseArgsspecial(MethodHookParam param, JSONObject hookJson,List<String> paraname)
+    {
+        JSONObject args =  new JSONObject();
+        int i=0;
+        for (Object object : (Object[]) param.args) {
+            try {
+                if(object!=null)
+                    if(paraname.get(i)!=null){
+                        args.put(paraname.get(i), ParseGeneratorNotype.genericParse(object));
+                    }else{
+                        args.put("", ParseGeneratorNotype.genericParse(object));
+                    }
+                else{
+                    if(paraname.get(i)!=null){
+                        args.put(paraname.get(i),"");
+                    }else{
+                        args.put("","");
+                    }
+                }
+            } catch (Exception e) {
+                Logger.logShell("args error: " + e.getMessage()+" "+hookJson.toString());
+            }
+            i++;
+        }
+        return args;
+    }
+
     public static JSONObject parseArgs(MethodHookParam param, JSONObject hookJson,List<String> paraname)
     {
         JSONObject args =  new JSONObject();
@@ -201,13 +228,13 @@ public class ParseGeneratorNotype {
         for (Object object : (Object[]) param.args) {
             try {
                 if(object!=null)
-                    if(paraname!=null){
+                    if(paraname.get(i)!=null){
                         args.put(paraname.get(i), ParseGeneratorNotype.parse(object));
                     }else{
                         args.put("", ParseGeneratorNotype.parse(object));
                     }
                 else{
-					if(paraname!=null){
+					if(paraname.get(i)!=null){
 						args.put(paraname.get(i),"");
 					}else{
 						args.put("","");
@@ -220,7 +247,7 @@ public class ParseGeneratorNotype {
         }
         return args;
     }
-	
+
 	public static Object parseResults(MethodHookParam param, JSONObject hookJson)
 	{
 		try {
