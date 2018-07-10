@@ -47,6 +47,12 @@ public class ParaName {
         setstartservice();
         setrequestLocationUpdates();
     }
+    // registerContentObserver(Uri uri, boolean notifyForDescendants, ContentObserver observer)
+    private void setregisterContentObserver(){
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("provider");
+        findparanameMap.put("android.location.LocationManager->requestLocationUpdates",paranameList);
+    }
 
     private void setrequestLocationUpdates(){
         List<String> paranameList=new ArrayList<>();

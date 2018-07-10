@@ -160,11 +160,11 @@ public class Logger {
 
         if(param.args!=null)//&&paraname!=null
         	if(param.method.getName().equals("equals")) {
-				XposedBridge.log("specialwork");
+				//XposedBridge.log("specialwork");
 				hookJson.put("Parameters", ParseGeneratorNotype.parseArgsspecial(param, hookJson, paraname));
 			}
 			else{
-				XposedBridge.log("specialnotwork");
+				//XposedBridge.log("specialnotwork");
 				hookJson.put("Parameters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
 			}
         if(param.getResult()!=null)

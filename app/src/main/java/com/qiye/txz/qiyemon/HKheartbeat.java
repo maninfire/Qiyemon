@@ -4,22 +4,20 @@ import android.os.Process;
 
 import com.qiye.txz.qiyemon.utils.Logger;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
-import  java.lang.StringBuilder;
-import  java.lang.String;
-import de.robv.android.xposed.XC_MethodHook;
 
-public class HKtoString extends XC_MethodHook implements HKmethod{
+import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
+
+public class HKheartbeat extends XC_MethodHook{
     private String mClassName;
     private String mMethodName;
     //private MethodApiType mType;
     private String mType;
     private boolean mThisObject= true;
 
-    public HKtoString(String className, String methodName, boolean thisObject,/*MethodApiType*/String type){
+    public void HKheartbeat11(String className, String methodName, boolean thisObject,/*MethodApiType*/String type){
         mClassName = className;
         mMethodName = methodName;
         mThisObject=thisObject;
@@ -37,6 +35,7 @@ public class HKtoString extends XC_MethodHook implements HKmethod{
             try {
                 if (Process.myUid() <= 0)
                     return;
+                XposedBridge.log("afterbeat");
                 logGenericMethod(param,mThisObject,mType);
             } catch (Throwable ex) {
                 throw ex;
@@ -54,9 +53,9 @@ public class HKtoString extends XC_MethodHook implements HKmethod{
         if(param.args!=null)//&&paraname!=null
             hookJson+="\"Parameters\":"+"{"+parseArgs(param,hookJson,paraname)+"},";
         if(param.getResult()!=null)
-           hookJson+="\"result\":"+"\""+(String)param.getResult()+"\",";
+           hookJson+="\"result\":"+"\""+param.getResult().toString()+"\",";
         if(param.thisObject!=null)
-            hookJson+="\"this\":"+"\""+(String)param.thisObject+"\",";
+            hookJson+="\"this\":"+"\""+param.thisObject.toString()+"\",";
         hookJson+=addHookDataJson(param,mType)+"}";
 
         Logger.logHookextra(hookJson);
