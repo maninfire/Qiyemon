@@ -25,6 +25,10 @@ import de.robv.android.xposed.XposedBridge;
 
 
 public class Logger {
+	public static final ThreadLocal BroadcastItemobject = new ThreadLocal();
+	public static final ThreadLocal MessageItemobject = new ThreadLocal();
+	public static final ThreadLocal ServiceItemobject = new ThreadLocal();
+
 	public static final Gson gson = new Gson();
 	private static PrintWriter logWriter = null;
 	
@@ -71,7 +75,12 @@ public class Logger {
 		//XposedBridge.log(LOGTAG_WORKFLOW+PACKAGENAME+":"+hookData.toString());
 		//XposedBridge.log("loghook");
 		//System.out.println(ho);
-		log(LOGTAG_WORKFLOW+":"+hookData);
+		StringBuffer text=new StringBuffer();
+		text.append(LOGTAG_WORKFLOW);
+		text.append("heartbeatsignal");
+		text.append(":");
+		text.append(hookData);
+		log(text.toString());
 	}
 
 	public static void logShell(String message){
@@ -149,15 +158,41 @@ public class Logger {
 	
 	public static void logGenericMethod(MethodHookParam param, boolean mThisObject, /*String*/ String mType) throws JSONException {
 		//JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+        JSONObject tempjson;
 		JSONObject hookJson = new JSONObject();
-		List<String> paraname=null;
+		List<List<String>> paraname=null;
 		for (String method : logpn.findparanameMap.keySet()) {
 			//System.out.println(method + " ：" + pn.findparanameMap.get(method));
 			if(method.equals(param.method.getDeclaringClass().getName()+"->"+param.method.getName())){
 				paraname=logpn.findparanameMap.get(method);
 			}
 		}
+        Object p = Logger.BroadcastItemobject.get();
+        if(p != null) {
+            tempjson = new JSONObject();
+            tempjson.put("intentAction", ((BroadcastItem)p).intentAction);
+            tempjson.put("receiverTo", ((BroadcastItem)p).receiverTo);
+            tempjson.put("intentCommand", ((BroadcastItem)p).intentCommand);
+            hookJson.put("BroadcastItem", tempjson);
+        }
 
+        p = Logger.MessageItemobject.get();
+        if(p != null) {
+            tempjson = new JSONObject();
+            tempjson.put("msgTarget", ((MessageItem)p).msgTarget);
+            tempjson.put("msgCode", ((MessageItem)p).msgCode);
+            tempjson.put("codeString", ((MessageItem)p).codeString);
+            hookJson.put("MessageItem", tempjson);
+        }
+
+        p = Logger.ServiceItemobject.get();
+        if(p != null) {
+            tempjson = new JSONObject();
+            tempjson.put("className", ((ServiceItem)p).className);
+            tempjson.put("packageName", ((ServiceItem)p).packageName);
+            tempjson.put("amCommand", ((ServiceItem)p).amCommand);
+            hookJson.put("ServiceItem", tempjson);
+        }
         if(param.args!=null)//&&paraname!=null
         	if(param.method.getName().equals("equals")) {
 				//XposedBridge.log("specialwork");
@@ -170,8 +205,8 @@ public class Logger {
         if(param.getResult()!=null)
 			//hookJson.put("result",param.getResult());
 			hookJson.put("result", ParseGeneratorNotype.parseResults(param,hookJson));
-		//if(param.thisObject!=null && mThisObject)
-			//hookJson.put("this",ParseGeneratorNotype.parseThis(param,hookJson));
+		if(param.thisObject!=null && mThisObject)
+			hookJson.put("this",ParseGeneratorNotype.parseThis(param,hookJson));
 		hookJson=ParseGeneratorNotype.addHookDataJson(hookJson,param,mType);
 		Logger.logHook(hookJson);
 	}

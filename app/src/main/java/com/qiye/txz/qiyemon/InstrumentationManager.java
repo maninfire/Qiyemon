@@ -20,6 +20,7 @@ import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
@@ -31,7 +32,7 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
     public static String CONFIG_FILE = "/data/local/tmp/hooks.json";
     public static String CONFIG_NATIVE_FILE = "/data/local/tmp/hooknatives.json";
     public static Boolean TRACE = false;
-
+    public static String INJECTSO = "/data/local/tmp/mycydia.so";
     private static Set<String> OS_APPS = new HashSet<String>(Arrays.asList(
             "com.android.systemui"
             ,"com.android.inputmethod.latin"
@@ -55,7 +56,8 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
             ,"com.kingroot.kinguser"
             ,"com.kingsoft"
             ,"com.tencent.android.qqdownloader"
-            ,"com.qiye.txz.heartbeatdetect")) ;
+            ,"com.qiye.txz.heartbeatdetect"
+            ,"com.qiye.txz.sendsms")) ;
 
     // Call when zygote initialize
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -76,23 +78,33 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
         }else if(lpparam.isFirstApplication && !OS_APPS.contains(lpparam.packageName))
         {
             Logger.PACKAGENAME = lpparam.packageName;
+           // nativeHook(lpparam);
+
             try {
                 instrumentApp();
-                //XHookFramework extrahook=new  XHookFramework();
-                //extrahook.setandhookgLoadPackParam(lpparam);
+                //hookextra(new HKtoStringex("java.lang.StringBuilder","toString",true,"toString"));
+                hookextra(new HkMessageItem("Android.os.Handler","dispatchMessage",true," "));
+                hookextra(new HkBroadcastItem("Android.app.LoadedApk$ReceiverDispatcher$Args","run",true," "));
             } catch (FileNotFoundException e) {
                 Logger.logError(e.getMessage());
             } catch (IOException e) {
                 Logger.logError(e.getMessage());
             }
         }else if(lpparam.packageName.equals("com.qiye.txz.heartbeatdetect")){
-            //XposedBridge.log("heartbeatshook");
-            //hookextra(new HKheartbeat("HorizonService","checkheart",true,"null"));
             showmethod(lpparam);
-            //XposedHelpers.findAndHookMethod("com.qiye.txz.heartbeatdetect.HorizonService", lpparam.classLoader, "checkheart", new Object[]{new HKheartbeat()});
         }
-
     }
+    public void nativeHook(XC_LoadPackage.LoadPackageParam loadPackageParam){
+        try{
+            Class clazz = XposedHelpers.findClass(GlobalConfig.Inject_ClassName, loadPackageParam.classLoader);
+            Method method = XposedHelpers.findMethodExact(clazz, GlobalConfig.Inject_Invoke_FunName, String.class);//查找system.load函数
+            method.invoke(null, INJECTSO);//加载待注入库
+        }catch (Exception e){
+            XposedBridge.log("can not load "+INJECTSO);
+            XposedBridge.log(e);
+        }
+    }
+
     public class HooknativeConfig {
         private String so_name;
         private String method;
@@ -110,8 +122,7 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
             hook(new MethodHookImpl(hookConfig.class_name,hookConfig.method,hookConfig.thisObject,hookConfig.type));
         }
         //hookextra(new HKequals("java.lang.String","equals",true,"equals"));
-        //hookextra(new HKtoStringex("java.lang.StringBuilder","toString",true,"toString"));
-        hookextra(new HKtoString("java.lang.String","toString",true,"toString"));
+        //hookextra(new HKtoString("java.lang.String","toString",true,"toString"));
         //hookextra(new HKtoString("java.lang.String","startsWith",true,"toString"));
         //hookextra(new HKtoString("java.lang.String","indexOf",true,"toString"));
         //hookextra(new HKtoString("java.lang.String","contains",true,"toString"));
@@ -195,7 +206,7 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
             }
 
         } catch (Throwable ex) {
-
+            Logger.logError(ex.getMessage());
         }
     }
     private static void showmethod(LoadPackageParam lpparam){
@@ -208,16 +219,14 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
                 Logger.logError(message);
                 return;
             }
-
             for (Method method : hookClass.getDeclaredMethods()){
                  XposedBridge.log(method.getName());
                  if(method.getName().equals("checkheart")){
                      XposedBridge.hookMethod(method, new HKheartbeat());
                     }
                 }
-
         } catch (Throwable ex) {
-
+            Logger.logError(ex.getMessage());
         }
     }
 }

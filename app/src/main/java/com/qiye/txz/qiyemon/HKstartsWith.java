@@ -112,16 +112,6 @@ public class HKstartsWith extends XC_MethodHook implements HKmethod{
     public void monitorMethod(XC_MethodHook.MethodHookParam param)
     {
         try {
-            /*
-            if(param.method.getName().contains("invoke"))
-                Logger.logReflectionMethod(param,mThisObject,mType);
-            else if(param.method.getName().contains("write"))
-                Logger.logProcessWriteMethod(param,mThisObject,mType);
-            else if(param.method.getName().contains("read"))
-                Logger.logProcessReadMethod(param,mThisObject,mType);
-                //else if(param.method.getName().contains("openDexFile") || param.method.getName().equals("load"))
-                // Logger.logAndDumpFile(param,mThisObject,mType);
-            else*/
             logGenericMethod(param,mThisObject,mType);
         } catch (Exception e) {
             XposedBridge.log(e);

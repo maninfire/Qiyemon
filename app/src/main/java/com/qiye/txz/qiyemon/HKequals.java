@@ -62,7 +62,7 @@ public class HKequals extends XC_MethodHook implements HKmethod{
         List<String> paraname=new ArrayList<> ();
         paraname.add("object");
         if(param.args!=null)//&&paraname!=null
-                hookJson.put("Parameters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
+                //hookJson.put("Parameters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
         if(param.getResult()!=null)
             hookJson.put("result", ParseGeneratorNotype.parseResults(param,hookJson));
         if(param.thisObject!=null && mThisObject)

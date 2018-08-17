@@ -49,138 +49,180 @@ public class ParaName {
     }
     // registerContentObserver(Uri uri, boolean notifyForDescendants, ContentObserver observer)
     private void setregisterContentObserver(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("provider");
-        findparanameMap.put("android.location.LocationManager->requestLocationUpdates",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.location.LocationManager->requestLocationUpdates",allparam);
     }
 
     private void setrequestLocationUpdates(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("provider");
-        findparanameMap.put("android.location.LocationManager->requestLocationUpdates",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.location.LocationManager->requestLocationUpdates",allparam);
     }
 
     private void setstartservice(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("Intent");
-        findparanameMap.put("android.content.ContextWrapper->startService",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.content.ContextWrapper->startService",allparam);
     }
     private void sethandleStopService(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("token");
-        findparanameMap.put("android.app.ActivityThread->handleStopService",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.ActivityThread->handleStopService",allparam);
     }
     private void setAssetMangeropen(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("fileName");
-        findparanameMap.put("android.content.res.AssetManager->open",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.content.res.AssetManager->open",allparam);
     }
     private void sethandleCreateService(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("data");
         paranameList.add("resourceName");
-        findparanameMap.put("android.app.ActivityThread->handleCreateService",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.ActivityThread->handleCreateService",allparam);
     }
     private void setgetresourceAsStream(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("md5");
         paranameList.add("resourceName");
-        findparanameMap.put("java.lang.ClassLoader->getResourceAsStream",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.ClassLoader->getResourceAsStream",allparam);
     }
     private void setregisterReceiver(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("IntentFilter");
         paranameList.add("BroadcastReceiver");
-        findparanameMap.put("android.content.ContextWrapper->registerReceiver",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.content.ContextWrapper->registerReceiver",allparam);
     }
     private void setreplaceall(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("regularExpression");
         paranameList.add("replacement");
-        findparanameMap.put("java.lang.String->replaceAll",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->replaceAll",allparam);
     }
 
     private void setinvoke(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("receiver");
         paranameList.add("methodName");
         paranameList.add("className");
         paranameList.add("args");
-        findparanameMap.put("java.lang.reflect->invoke",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.reflect->invoke",allparam);
     }
     private void setstringcontain(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("String");
-        findparanameMap.put("java.lang.String->contains",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->contains",allparam);
     }
     private void setgetApplication(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("packageName");
         paranameList.add("flags");
-        findparanameMap.put("android.app.ApplicationPackageManager->getApplicationInfo",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.ApplicationPackageManager->getApplicationInfo",allparam);
     }
 
     private void setstringequal(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("object");
-        findparanameMap.put("java.lang.String->equals",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->equals",allparam);
     }
     private void setgetpackageInfo(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("packageName");
         paranameList.add("flags");
-        findparanameMap.put("android.app.ApplicationPackageManager->getPackageInfo",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.ApplicationPackageManager->getPackageInfo",allparam);
     }
     private void setFiledelet(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("path");
-        findparanameMap.put("java.io.File->delete",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.io.File->delete",allparam);
     }
     private void setFileoutinit(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("append");
         paranameList.add("file");
-        findparanameMap.put("java.io.FileOutputStream-><init>",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.io.FileOutputStream-><init>",allparam);
     }
     private void initPara(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("");
         //paranameList.remove();
-        findparanameMap.put("",paranameList);
+        findparanameMap.put("",allparam);
         //map.get("key1")
         //map.remove("key1");
         //map.clear();
     }
     private void setsendTextMessage(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("destinationAddress");
         paranameList.add("scAddress");
         paranameList.add("text");
         paranameList.add("sentIntent");
-        findparanameMap.put("android.telephony.SmsManager->sendTextMessage",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.telephony.SmsManager->sendTextMessage",allparam);
     }
     private void setcompareToIgnoreCase(){
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
         paranameList.add("String");
         //paranameList.remove();
-        findparanameMap.put("java.lang.String->compareToIgnoreCase",paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->compareToIgnoreCase",allparam);
         //map.get("key1")
         //map.remove("key1");
         //map.clear();
     }
     private void setendsWith() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("suffix");
-        findparanameMap.put("java.lang.String->endsWith", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->endsWith", allparam);
     }
     private void setCipherinit() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("opmode");
         paranameList.add("Algorithm");
         paranameList.add("Key");
-        findparanameMap.put("javax.crypto.Cipher->init", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("javax.crypto.Cipher->init", allparam);
     }
     private void setaddview() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("height");
         paranameList.add("flags");
@@ -191,105 +233,149 @@ public class ParaName {
         paranameList.add("TopClassName");
         paranameList.add("type");
         paranameList.add("WinType");
-        findparanameMap.put("android.view.WindowManager->addView", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.view.WindowManager->addView", allparam);
     }
     private void setforname() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("className");
-        findparanameMap.put("java.lang.Class->forName", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.Class->forName", allparam);
     }
     private void setstartActivityForResult() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("Intent");
-        findparanameMap.put("android.app.Activity->startActivityForResult", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.Activity->startActivityForResult", allparam);
     }
     private void setDialogshow() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("Text");
-        findparanameMap.put("android.app.Dialog->show", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.Dialog->show", allparam);
     }
     private void setquery() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("selectionArgs");
         paranameList.add("sortOrder");
         paranameList.add("selection");
         paranameList.add("url");
         paranameList.add("projection");
-        findparanameMap.put("android.content.ContentResolver->query", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.content.ContentResolver->query", allparam);
     }
     private void setquery1() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("Data");
         paranameList.add("Body");
         paranameList.add("Address");
-        findparanameMap.put("android.content.ContentResolver->query", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.content.ContentResolver->query", allparam);
     }
     private void setgetMessageBody() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
-        findparanameMap.put("android.telephony.SmsMessage->getMessageBody", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.telephony.SmsMessage->getMessageBody", allparam);
     }
     private void setsleep() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("millis");
-        findparanameMap.put("java.lang.Thread->sleep", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.Thread->sleep", allparam);
     }
     private void setPexec() {
-        List<String> paranameList = new ArrayList<>();
-        paranameList.add("directory");
-        paranameList.add("prog");
-        findparanameMap.put("java.lang.ProcessManager->exec", paranameList);
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList0 = new ArrayList<>();
+        paranameList0.add("command");
+        paranameList0.add("directory");
+        paranameList0.add("callback");
+        List<String> paranameList1 = new ArrayList<>();
+        paranameList1.add("command");
+        paranameList1.add("directory");
+        paranameList1.add("callback");
+        paranameList1.add("in");
+        paranameList1.add("out");
+        paranameList1.add("redirectErrorStream");
+        allparam.add(paranameList0);
+        allparam.add(paranameList1);
+        findparanameMap.put("java.lang.ProcessManager->exec", allparam);
     }
     private void setIoopen() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("path");
         paranameList.add("flag");
-        findparanameMap.put("libcore.io.IoBridge->open", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("libcore.io.IoBridge->open", allparam);
     }
     private void setnativeLoad() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("filename");
         paranameList.add("loader");
         paranameList.add("ldLibraryPath");
-        findparanameMap.put("java.lang.Runtime->nativeLoad", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.Runtime->nativeLoad", allparam);
     }
     private void setSysProset() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("key");
-        findparanameMap.put("android.os.SystemProperties->get", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.os.SystemProperties->get", allparam);
     }
     private void setreplace() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("oldChar");
         paranameList.add("newChar");
-        findparanameMap.put("java.lang.String->replace", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->replace", allparam);
     }
     private void setcompareTo() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("anotherString");
-        findparanameMap.put("java.lang.String->compareTo", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->compareTo", allparam);
     }
     private void setRexec() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("command");
-        findparanameMap.put("java.lang.Runtime->exec", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.Runtime->exec", allparam);
     }
     private void setsplit() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("regex");
         paranameList.add("limit");
-        findparanameMap.put("java.lang.String->split", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("java.lang.String->split", allparam);
     }
     private void setdoFinal() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("input");
         paranameList.add("limit");
-        findparanameMap.put("javax.crypto.Cipher->doFinal", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("javax.crypto.Cipher->doFinal", allparam);
     }
     private void setBdecode() {
+        List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
         paranameList.add("str");
         paranameList.add("flags");
-        findparanameMap.put("android.util.Base64->decode", paranameList);
+        allparam.add(paranameList);
+        findparanameMap.put("android.util.Base64->decode", allparam);
     }
 
 }

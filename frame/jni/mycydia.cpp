@@ -4,7 +4,16 @@
 #include <unistd.h>
 #include "mycydia.h"
 #include <jni.h>
+#include "string.h"
 
+#ifdef __linux__
+    #define ptr uint32_t
+#endif
+#ifdef __GNUC__
+    #define ptr uint64_t
+#else
+#define ptr uint64_t
+#endif
 
 char target_soname[512];
 char hook_sopath[512];
@@ -119,7 +128,7 @@ void* get_remote_addr(int target_pid, const char* module_name, void* local_addr)
 	local_handle = get_module_base(-1, module_name);		//得到模块在当前进程的基址
 	remote_handle = get_module_base(target_pid, module_name);	//得到模块在远程进程的基址
 	DUALLOGD("[+] get_module_base: local[%08x], remote[%08x]\n", local_handle, remote_handle);
-	void* ret_addr = (void *)((uint32_t)local_addr + (uint32_t)remote_handle - (uint32_t)local_handle);	//根据地址=基址+偏移得到在远程空间的实际地址
+	void* ret_addr = (void *)((ptr)local_addr + (ptr)remote_handle - (ptr)local_handle);	//根据地址=基址+偏移得到在远程空间的实际地址
 	#if defined(__i386__)
 		if (!strcmp(module_name, "/system/lib/libc.so"))
 		{

@@ -17,10 +17,7 @@ public class HKheartbeat extends XC_MethodHook{
     private String mType;
     private boolean mThisObject= true;
 
-    public void HKheartbeat11(String className, String methodName, boolean thisObject,/*MethodApiType*/String type){
-        mClassName = className;
-        mMethodName = methodName;
-        mThisObject=thisObject;
+    public void HKheartbeat(String type){
         mType=type;
     }
     public String getClassName(){
@@ -69,8 +66,8 @@ public class HKheartbeat extends XC_MethodHook{
         hookData+="\"UID\":"+ Process.myUid()+",";
         hookData+="\"Method\":"+"\""+ param.method.getDeclaringClass().getName()+"->"+param.method.getName()+"\",";
         //hookData.put("method", param.method.getName());
-        hookData+="\"Function\":"+ "\""+type+"\",";
-        hookData+="\"Time\":"+System.currentTimeMillis()+",";
+        hookData+="\"Function\":"+ "\"heartbeat\",";
+        hookData+="\"Time\":"+System.currentTimeMillis()+"";
         return hookData;
     }
 
