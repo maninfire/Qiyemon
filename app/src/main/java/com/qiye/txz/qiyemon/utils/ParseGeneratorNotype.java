@@ -1,11 +1,18 @@
 package com.qiye.txz.qiyemon.utils;
 
+import android.app.DownloadManager;
+import android.app.Notification;
+import android.content.ComponentName;
+import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Process;
+import android.util.SparseArray;
+import android.view.WindowManager;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -16,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -26,6 +34,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.crypto.Cipher;
@@ -49,32 +58,157 @@ public class ParseGeneratorNotype {
 			returnObj = httpRequestBaseParse(obj);
 		else if(obj instanceof HttpResponse)
 			returnObj = httpResponseParse(obj);
-		//else if(obj instanceof HttpURLConnection || obj instanceof HttpsURLConnection )
-			//returnObj = URLConnectionParse(obj);
 		else if(obj instanceof URL)
 			returnObj = URLParse(obj);
-		//else if(obj instanceof MessageDigest)
-			//returnObj = messageDigestParse(obj);
 		else if(obj instanceof Cipher){
-			//XposedBridge.log("Cipher");
-			//i++;
 			returnObj = cipherParse((Cipher)obj);
 		}else if(obj instanceof SecretKeySpec){
 
 			returnObj = SecretKeySpecParse(obj);
-		}else if(obj instanceof String){
-		//XposedBridge.log(obj.toString());
+		}else if(obj instanceof String||obj instanceof Integer || obj instanceof Float){
             returnObj = Stringparse(obj);
 		}else if(obj instanceof String[]){
-            //XposedBridge.log(obj.toString());
             returnObj = StringListparse(obj);
-        }
-		//else if(obj instanceof Intent)
-			//returnObj = intentParse(obj);
-		else
+        }else if(obj instanceof Integer || obj instanceof Float ||obj instanceof ContentResolver){
+            returnObj = parsetostirng(obj);
+        }else if(obj instanceof File){
+            //XposedBridge.log(obj.toString());
+            returnObj = Fileparse(obj);
+        }else if(obj instanceof DownloadManager.Request){
+            Requestparse(obj);
+        }else if(obj instanceof ComponentName){
+			returnObj=ComponentNameparse(obj);
+		}else if(obj instanceof Intent) {
+            returnObj = intentParse(obj);
+        }else
 			returnObj = genericParse(obj);////
 		return returnObj;
 	}
+	public static JSONObject windowsMangerlayoutParamsParseafter(Object obj){
+            Object v0 = obj;
+            if(((WindowManager.LayoutParams)v0).type >= 1 && ((WindowManager.LayoutParams)v0).type <= 99) {
+                return null;
+            }
+
+            if(((WindowManager.LayoutParams)v0).type >= 1000 && ((WindowManager.LayoutParams)v0).type <= 1999) {
+                return null;
+            }
+
+            if(((WindowManager.LayoutParams)v0).type < 2000) {
+                return null;
+            }
+
+            if(((WindowManager.LayoutParams)v0).type > 2999) {
+                return null;
+            }
+            try {
+                JSONObject v2 = new JSONObject();
+                JSONObject v3 = new JSONObject();
+                v3.put("window", "SYSTEM_WINDOW");
+                v3.put("type", ((WindowManager.LayoutParams)v0).type);
+                v3.put("flags", ((WindowManager.LayoutParams)v0).flags);
+                v3.put("height", ((WindowManager.LayoutParams)v0).height);
+                v3.put("width", ((WindowManager.LayoutParams)v0).width);
+                long v0_1 = System.currentTimeMillis();
+                String v4 = String.valueOf(v0_1) + ".png";
+                String v5 = "/data/local/tmp/dumpFile/" + v4;
+                v3.put("screenshot", v4);
+                v3.put("uidump", "uidump_" + String.valueOf(v0_1) + ".xml");
+                return v3;
+            }catch (Exception e){
+             return null;
+            }
+    }
+    public static JSONObject windowsMangerlayoutParamsParsebefore(Object obj){
+        String v1;
+        String v3 = "";
+        String v4 = "";
+        Object v0 = obj;
+        SparseArray j = new SparseArray();
+        j.put(1, "TYPE_BASE_APPLICATION");
+        j.put(2, "TYPE_APPLICATION");
+        j.put(3, "TYPE_APPLICATION_STARTING");
+        j.put(1000, "TYPE_APPLICATION_PANEL");
+        j.put(1001, "TYPE_APPLICATION_MEDIA");
+        j.put(1002, "TYPE_APPLICATION_SUB_PANEL");
+        j.put(1003, "TYPE_APPLICATION_ATTACHED_DIALOG");
+        j.put(2000, "TYPE_STATUS_BAR");
+        j.put(2001, "TYPE_SEARCH_BAR");
+        j.put(2002, "TYPE_PHONE");
+        j.put(2003, "TYPE_SYSTEM_ALERT");
+        j.put(2005, "TYPE_TOAST");
+        j.put(2006, "TYPE_SYSTEM_OVERLAY");
+        j.put(2007, "TYPE_PRIORITY_PHONE");
+        j.put(2014, "TYPE_STATUS_BAR_PANEL");
+        j.put(2008, "TYPE_SYSTEM_DIALOG");
+        j.put(2009, "TYPE_KEYGUARD_DIALOG");
+        j.put(2010, "TYPE_SYSTEM_ERROR");
+        j.put(2011, "TYPE_INPUT_METHOD");
+        j.put(2012, "TYPE_INPUT_METHOD_DIALOG");
+        try{
+        if(((WindowManager.LayoutParams)v0).type < 1 || ((WindowManager.LayoutParams)v0).type > 99) {
+            if(((WindowManager.LayoutParams)v0).type >= 1000 && ((WindowManager.LayoutParams)v0).type <= 1999) {
+                v1 = "SUB_WINDOW";
+            }else if(((WindowManager.LayoutParams)v0).type >= 2000 && ((WindowManager.LayoutParams)v0).type <= 2999){
+                v1 = "SYSTEM_WINDOW";
+            }else{
+                v1 = "UNKOWN_WINDOW";
+            }
+        }else {
+                v1 = "APPLICATION_WINDOW";
+        }
+            JSONObject v5 = new JSONObject();
+            JSONObject v6 = new JSONObject();
+            String v7 = "SelfPackagename";
+            String v2 = "";
+            v6.put(v7, v2);
+            v6.put("window", v1);
+            Object v1_1 = j.get(((WindowManager.LayoutParams)v0).type);
+            v2 = "WinType";
+            if(v1_1 == null) {
+                v1 = "UNKOWN_TYPE";
+            }
+
+            v6.put(v2, v1);
+            v6.put("type", ((WindowManager.LayoutParams)v0).type);
+            v6.put("flags", ((WindowManager.LayoutParams)v0).flags);
+            v6.put("height", ((WindowManager.LayoutParams)v0).height);
+            v6.put("width", ((WindowManager.LayoutParams)v0).width);
+            v6.put("TopPackageName", v3);
+            v6.put("TopClassName", v4);
+            v5.put("Parameters", v6);
+
+            return v5;
+        }catch (Exception e){
+            return null;
+        }
+    }
+	private static Object Fileparse(Object obj){
+		File a=(File)obj;
+		String path=a.getAbsolutePath();
+		return path;
+	}
+	private static Object ComponentNameparse(Object obj){
+		//(ComponentName)obj.getPackageName() + "/" + param.args[0].getClassName();
+		ComponentName admin=(ComponentName)obj;
+		String v0="";
+		v0=admin.getPackageName()+"/"+admin.getClassName();
+		return (Object) v0;
+	}
+    private static Object Requestparse(Object obj){
+	    //XposedBridge.log(ObjtoJson(obj)+"");
+        return ObjtoJson(obj);
+    }
+	private static Object Notificationparse(Object obj){
+	    return obj;
+    }
+	private static  Object parsetostirng(Object obj){
+	    JSONObject json = new JSONObject();
+	    JSONObject nint = new JSONObject();
+	    nint=ObjtoJson(obj);
+	    //json.put("value",nint.get("value"));
+	    return obj.toString();
+    }
     private static Object StringListparse(Object objs){
 	    JSONObject args = new JSONObject();
         String strlist="[";
@@ -244,8 +378,6 @@ public class ParseGeneratorNotype {
 			json.put("extras", extraData);
 		} catch (Exception e) {
 		}
-
-
 		return json;
 	}
 
@@ -293,32 +425,36 @@ public class ParseGeneratorNotype {
 		return hookData;
 	}
 
-    public static JSONObject parseArgsspecial(MethodHookParam param, JSONObject hookJson,List<List<String>> allparam)
+    public static JSONObject parseArgsspecial(MethodHookParam param, JSONObject hookJson,List<List<String>> allparam,String tag)
     {
         JSONObject args =  new JSONObject();
-        List<String> paraname=null;
+        List<String> paraname=new ArrayList<String>();  ;
         int i=0;
         for(List<String> selfparam:allparam){
-            XposedBridge.log(selfparam.size()+"canshuchangdu");
-            XposedBridge.log(param.args.length+"changdu");
-            if(selfparam.size()==param.args.length){
-                paraname=selfparam;
+            if(selfparam.size()== param.args.length){
+                paraname.addAll(selfparam);
             }
         }
+
         for (Object object : (Object[]) param.args) {
             try {
-                if(object!=null)
-                    if(paraname.get(i)!=null){
-                        args.put(paraname.get(i), ParseGeneratorNotype.genericParse(object));
-                    }else{
-                        args.put("", ParseGeneratorNotype.genericParse(object));
+                if(paraname.size()>i){
+                    if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("javax.crypto.Cipher->init")){
+                        if(paraname.get(i).equals("opmode")){
+                            args.put("opmode", Cipheropmodeparse(object).get("opmode"));
+                            i++;
+                            continue;
+                        }
+                    }else if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("android.view.WindowManager->addView")){
+                        if(param.args[1] instanceof WindowManager.LayoutParams){
+                            args.put("opmode", Cipheropmodeparse(object).get("opmode"));
+                            i++;
+                            continue;
+                        }
                     }
-                else{
-                    if(paraname.get(i)!=null){
-                        args.put(paraname.get(i),"");
-                    }else{
-                        args.put("","");
-                    }
+                    args.put(paraname.get(i), ParseGeneratorNotype.parse(object));
+                }else{
+                    args.put(object.getClass().getName(),ParseGeneratorNotype.parse(object));
                 }
             } catch (Exception e) {
                 Logger.logShell("args error: " + e.getMessage()+" "+hookJson.toString());
@@ -331,19 +467,35 @@ public class ParseGeneratorNotype {
     public static JSONObject parseArgs(MethodHookParam param, JSONObject hookJson,List<List<String>> allparam)
     {
         JSONObject args =  new JSONObject();
-        List<String> paraname=null;
+        List<String> paraname=new ArrayList<String>();  ;
         int i=0;
+        //XposedBridge.log(param.method.getName()+"..........");
         for(List<String> selfparam:allparam){
-            //XposedBridge.log(selfparam.size()+"canshuchangdu");
-            //XposedBridge.log(param.args.length+"changdu");
-            if(selfparam.size()==param.args.length){
-                paraname=selfparam;
+
+           // XposedBridge.log(selfparam.size()+"canshuchangdu");
+           // XposedBridge.log(param.args.length+"changdu");\
+            for(String name:selfparam){
+                //XposedBridge.log(name);
+            }
+            if(selfparam.size()== param.args.length){
+                paraname.addAll(selfparam);
+            }
+        }
+        if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("android.content.ContextWrapper->registerReceiver")) {
+            //XposedBridge.log("start");
+            for (Object object : (Object[]) param.args) {
+                try{
+                    //XposedBridge.log(object.getClass().getName()+":"+ParseGeneratorNotype.parse(object));
+                }catch(Exception e){
+                   // XposedBridge.log(e);
+                }
+
             }
         }
 
         for (Object object : (Object[]) param.args) {
             try {
-                    if(paraname!=null && paraname.size()>i){
+                    if(paraname.size()>i){
                         if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("javax.crypto.Cipher->init")){
                             //XposedBridge.log("cipherinit");
                             if(paraname.get(i).equals("opmode")){
@@ -353,24 +505,8 @@ public class ParseGeneratorNotype {
                                 continue;
                             }
                         }
-                        if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("java.lang.ProcessManager->exec")){
-                            XposedBridge.log(i+"num");
-                            XposedBridge.log(paraname.get(i));
-                            if(object instanceof String){
-                                XposedBridge.log("string");
-                            }
-                            XposedBridge.log( ParseGeneratorNotype.parse(object).toString());
-                        }
-
                         args.put(paraname.get(i), ParseGeneratorNotype.parse(object));
                     }else{
-                        if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("java.lang.ProcessManager->exec")){
-                            XposedBridge.log(i+"num");
-                            if(object instanceof String){
-                                XposedBridge.log("string");
-                            }
-                            XposedBridge.log( ParseGeneratorNotype.parse(object).toString());
-                        }
                         args.put(object.getClass().getName(),ParseGeneratorNotype.parse(object));
                     }
             } catch (Exception e) {

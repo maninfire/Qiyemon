@@ -14,11 +14,11 @@ public class ParaName {
         setcompareToIgnoreCase();
         setendsWith();
         setCipherinit();
-        setaddview();
+        //setaddview();
         setforname();
         setstartActivityForResult();
         setDialogshow();
-        setquery1();
+        setquery();
         setgetMessageBody();
         //setsleep();
         setPexec();
@@ -46,8 +46,77 @@ public class ParaName {
         sethandleStopService();
         setstartservice();
         setrequestLocationUpdates();
+        setupdate();
+        setnotify();
+        setcontentdelete();
+        setcontentinsert();
+        setcontentuopdate();
+        setregisterContentObserver();
+        setvibarte();
+        setbroadcastIntent();
     }
     // registerContentObserver(Uri uri, boolean notifyForDescendants, ContentObserver observer)
+    private void setbroadcastIntent(){
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("caller");
+        paranameList.add("intent");
+        paranameList.add("resolvedType");
+        paranameList.add("resultTo");
+        paranameList.add("resultCode");
+        paranameList.add("resultData");
+        paranameList.add("map");
+        paranameList.add("requiredPermission");
+        paranameList.add("appOp");
+        paranameList.add("serialized");
+        paranameList.add("sticky");
+        paranameList.add("userId");
+        allparam.add(paranameList);
+        findparanameMap.put("android.os.SystemVibrator->vibrate",allparam);
+    }
+    private void setvibarte(){
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("milliseconds");
+        allparam.add(paranameList);
+        findparanameMap.put("android.os.SystemVibrator->vibrate",allparam);
+    }
+    private void setcontentuopdate(){
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("uri");
+        paranameList.add("values");
+        paranameList.add("selectionArgs");
+        paranameList.add("sortOrder");
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.NotificationManager->notify",allparam);
+    }
+    private void setcontentinsert(){
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("uri");
+        paranameList.add("values");
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.NotificationManager->notify",allparam);
+    }
+    private void setcontentdelete(){
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("uri");
+        paranameList.add("where");
+        paranameList.add("selectionArgs");
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.NotificationManager->notify",allparam);
+    }
+    private void setnotify(){
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList=new ArrayList<>();
+        paranameList.add("tag");
+        paranameList.add("id");
+        paranameList.add("notification");
+        allparam.add(paranameList);
+        findparanameMap.put("android.app.NotificationManager->notify",allparam);
+    }
     private void setregisterContentObserver(){
         List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList=new ArrayList<>();
@@ -260,11 +329,11 @@ public class ParaName {
     private void setquery() {
         List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList = new ArrayList<>();
+        paranameList.add("uri");
+        paranameList.add("projection");
+        paranameList.add("selection");
         paranameList.add("selectionArgs");
         paranameList.add("sortOrder");
-        paranameList.add("selection");
-        paranameList.add("url");
-        paranameList.add("projection");
         allparam.add(paranameList);
         findparanameMap.put("android.content.ContentResolver->query", allparam);
     }
@@ -294,17 +363,27 @@ public class ParaName {
         List<List<String>> allparam=new ArrayList<>();
         List<String> paranameList0 = new ArrayList<>();
         paranameList0.add("command");
+        paranameList0.add("Environment");
         paranameList0.add("directory");
         paranameList0.add("callback");
         List<String> paranameList1 = new ArrayList<>();
         paranameList1.add("command");
+        paranameList1.add("Environment");
         paranameList1.add("directory");
         paranameList1.add("callback");
         paranameList1.add("in");
         paranameList1.add("out");
         paranameList1.add("redirectErrorStream");
+        List<String> paranameList2 = new ArrayList<>();
+        paranameList2.add("command");
+        List<String> paranameList3 = new ArrayList<>();
+        paranameList3.add("command");
+        paranameList3.add("directory");
+        paranameList3.add("callback");
         allparam.add(paranameList0);
         allparam.add(paranameList1);
+        allparam.add(paranameList2);
+        allparam.add(paranameList3);
         findparanameMap.put("java.lang.ProcessManager->exec", allparam);
     }
     private void setIoopen() {
@@ -368,6 +447,29 @@ public class ParaName {
         paranameList.add("limit");
         allparam.add(paranameList);
         findparanameMap.put("javax.crypto.Cipher->doFinal", allparam);
+    }
+    private void setupdate() {
+        List<List<String>> allparam=new ArrayList<>();
+        List<String> paranameList = new ArrayList<>();
+        paranameList.add("input");
+        List<String> paranameList1 = new ArrayList<>();
+        paranameList1.add("input");
+        paranameList1.add("output");
+        List<String> paranameList2 = new ArrayList<>();
+        paranameList2.add("input");
+        paranameList2.add("inputOffset");
+        paranameList2.add("inputLen");
+        List<String> paranameList3 = new ArrayList<>();
+        paranameList3.add("input");
+        paranameList3.add("inputOffset");
+        paranameList3.add("inputLen");
+        paranameList3.add("output");
+        paranameList3.add("outputOffset");
+        allparam.add(paranameList);
+        allparam.add(paranameList1);
+        allparam.add(paranameList2);
+        allparam.add(paranameList3);
+        findparanameMap.put("javax.crypto.Cipher->update", allparam);
     }
     private void setBdecode() {
         List<List<String>> allparam=new ArrayList<>();

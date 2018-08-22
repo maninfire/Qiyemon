@@ -1,9 +1,15 @@
 package com.qiye.txz.qiyemon.utils;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.ContentValues;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,9 +23,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
 import de.robv.android.xposed.XposedBridge;
 
@@ -84,8 +95,6 @@ public class Logger {
 	}
 
 	public static void logShell(String message){
-		//XposedBridge.log(LOGTAG_SHELL+PACKAGENAME+":"+message);
-        //XposedBridge.log("logShell");
 		log(LOGTAG_SHELL+PACKAGENAME+":"+message);
 	}
 
@@ -155,12 +164,54 @@ public class Logger {
 		}
 		
 	}
-	
+	public static void updatee(String arg8, String arg9, XC_MethodHook.MethodHookParam param) {
+
+		try{
+			JSONObject hookData=ParseGeneratorNotype.generateHookDataJson(param,"");
+			int v7 = 3;
+			JSONObject v3 = new JSONObject();
+			v3.put("Function", arg8);
+			v3.put("Method", arg9);
+			JSONObject v4 = new JSONObject();
+			v4.put("url", param.args[0]);
+			Object v0 = param.args[1];
+			JSONObject v5 = new JSONObject();
+			Set v0_1 = ((ContentValues)v0).valueSet();
+			if(v0_1 != null) {
+				Iterator v6 = v0_1.iterator();
+				while(v6.hasNext()) {
+					v0 = v6.next();
+					v5.put(((Map.Entry)v0).getKey().toString(), ((Map.Entry)v0).getValue());
+				}
+
+				v4.put("ContentValue", v5);
+				v4.put("where", param.args[2]);
+				JSONArray v5_1 = new JSONArray();
+				if(param.args[v7] != null) {
+					v0 = param.args[v7];
+					String [] a=(String[])v0;
+					int v6_1 = a.length;
+					int v1;
+					for(v1 = 0; v1 < v6_1; ++v1) {
+						v5_1.put(a[v1]);
+					}
+				}
+
+				v4.put("selectionArgs", v5_1);
+				v3.put("Parameters", v4);
+				hookData.put("Parameter",v4);
+				Logger.logHook(hookData);
+			}
+		}catch(Exception e){
+			XposedBridge.log("updateee exception");
+		}
+
+	}
 	public static void logGenericMethod(MethodHookParam param, boolean mThisObject, /*String*/ String mType) throws JSONException {
 		//JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
         JSONObject tempjson;
 		JSONObject hookJson = new JSONObject();
-		List<List<String>> paraname=null;
+		List<List<String>> paraname=new ArrayList<List<String>>();
 		for (String method : logpn.findparanameMap.keySet()) {
 			//System.out.println(method + " ：" + pn.findparanameMap.get(method));
 			if(method.equals(param.method.getDeclaringClass().getName()+"->"+param.method.getName())){
@@ -195,25 +246,75 @@ public class Logger {
         }
         if(param.args!=null)//&&paraname!=null
         	if(param.method.getName().equals("equals")) {
-				//XposedBridge.log("specialwork");
-				hookJson.put("Parameters", ParseGeneratorNotype.parseArgsspecial(param, hookJson, paraname));
+				//hookJson.put("Parameters", ParseGeneratorNotype.parseArgsspecial(param, hookJson, paraname));
 			}
 			else{
-				//XposedBridge.log("specialnotwork");
 				hookJson.put("Parameters", ParseGeneratorNotype.parseArgs(param,hookJson,paraname));
 			}
         if(param.getResult()!=null)
-			//hookJson.put("result",param.getResult());
 			hookJson.put("result", ParseGeneratorNotype.parseResults(param,hookJson));
 		if(param.thisObject!=null && mThisObject)
 			hookJson.put("this",ParseGeneratorNotype.parseThis(param,hookJson));
-		hookJson=ParseGeneratorNotype.addHookDataJson(hookJson,param,mType);
+		//XposedBridge.log(param.method.getClass().getName()+"->"+param.method.getName());
+        if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("com.android.server.pm.PackageManagerService->installPackageAsUser")){
+            String a= d();
+            hookJson.put("CallStack",makestr(a));
+        }else if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("com.android.server.pm.PackageManagerService->installPackage")){
+            hookJson.put("CallStack",makestr(d()));
+        }else if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("com.android.server.pm.PackageManagerService->deletePackage")){
+            hookJson.put("CallStack",makestr(d()));
+        }else if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("android.content.pm.IPackageManager.Stub.Proxy->installPackage")){
+            hookJson.put("CallStack",makestr(d()));
+        }else if((param.method.getDeclaringClass().getName()+"->"+param.method.getName()).equals("android.content.pm.IPackageManager.Stub.Proxy->deletePackage")){
+            hookJson.put("CallStack",makestr(d()));
+        }
+            hookJson=ParseGeneratorNotype.addHookDataJson(hookJson,param,mType);
 		Logger.logHook(hookJson);
 	}
-	
-	public static void logReflectionMethod(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+	public static String makestr(String Putin){
+        String arg3=Putin;
+        int v1 = 128;
+        if(arg3 == null) {
+            arg3 = "";
+        }
+        else if(arg3.length() > v1) {
+            arg3 = arg3.substring(0, v1);
+        }
+        return arg3;
+    }
+    public static String d() {
+        RuntimeException e = new RuntimeException("run is here");
+        e.fillInStackTrace();
+        String stackTraces="";
+        for (Map.Entry<Thread, StackTraceElement[]> stackTrace:Thread.getAllStackTraces().entrySet())
+        {
+            Thread thread = (Thread) stackTrace.getKey();
+            StackTraceElement[] stack = (StackTraceElement[]) stackTrace.getValue();
+
+            // 进行过滤
+            if (thread.equals(Thread.currentThread())) {
+                continue;
+            }
+
+            stackTraces+=("[Dump Stack]"+"**********Thread name：" + thread.getName()+"**********");
+            int index = 0;
+            for (StackTraceElement stackTraceElement : stack) {
+                stackTraces+="[Dump Stack]"+index+": "+ stackTraceElement.getClassName()
+                        +"----"+stackTraceElement.getFileName()
+                        +"----" + stackTraceElement.getLineNumber()
+                        +"----" +stackTraceElement.getMethodName();
+            }
+            // 增加序列号
+            index++;
+        }
+        stackTraces+=("[Dump Stack]"+"********************* over **********************");
+
+        return stackTraces;
+    }
+
+    public static void logReflectionMethod(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
 		JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
-		
+
 		hookJson.put("hooked_class", ParseGeneratorNotype.parseRefelctionClassName(param, hookJson));
 		hookJson.put("hooked_method", ParseGeneratorNotype.parseRefelctionMethodName(param, hookJson));
 		if(param.args!=null)
@@ -223,7 +324,130 @@ public class Logger {
 		
 		Logger.logHook(hookJson);
 	}
-	
+	public static void logaftergetInstalledPackages(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+		JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+		Object v0 = param.getResult();
+		ArrayList v1 = new ArrayList();
+		JSONObject v2 = new JSONObject();
+		JSONObject v3 = new JSONObject();
+		JSONArray v4 = new JSONArray();
+		if(v0 != null) {
+			Iterator v5 = ((List)v0).iterator();
+			while(v5.hasNext()) {
+				v0 = v5.next();
+				if("com.qiye.txz.qiyemon".equals(((PackageInfo)v0).packageName)) {
+					continue;
+				}
+
+				((List)v1).add(v0);
+				v4.put(((PackageInfo)v0).packageName);
+			}
+		}
+
+		v3.put("PackageName", v4);
+		hookJson.put("result", v3);
+		param.setResult(v1);
+		Logger.logHook(hookJson);
+	}
+	public static void logaftergetInstalledApplication(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+		JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+		Object v0 = param.getResult();
+		ArrayList v1 = new ArrayList();
+		JSONObject v3 = new JSONObject();
+		JSONArray v4 = new JSONArray();
+		if(v0 != null) {
+			Iterator v5 = ((List)v0).iterator();
+			while(v5.hasNext()) {
+				v0 = v5.next();
+				if("com.qiye.txz.qiyemon".equals(((ApplicationInfo)v0).packageName)) {
+					continue;
+				}
+
+				((List)v1).add(v0);
+				v4.put(((ApplicationInfo)v0).packageName);
+			}
+		}
+
+		v3.put("PackageName", v4);
+		hookJson.put("result", v3);
+		param.setResult(v1);
+		Logger.logHook(hookJson);
+	}
+	public static void logbeforegetInstalledApplication(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+		JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+		Object v0=null;
+		JSONObject v2 = new JSONObject();
+		String v3 = "flags";
+		if(param.args[0] != null) {
+			v0 = param.args[0];
+		}
+		else {
+			String v0_1 = "";
+		}
+
+		v2.put(v3, v0);
+		hookJson.put("Parameters", v2);
+		Logger.logHook(hookJson);
+	}
+    public static void logbeforesetPasswordQuality(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+        JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+        JSONObject v2 = new JSONObject();
+        String v0 = "";
+        if(param.args[0] != null) {
+            try{
+                v0=ParseGeneratorNotype.parse((Object)(param.args[0])).toString();
+            }catch (Exception e){
+                XposedBridge.log("");
+            }
+
+        }
+
+        v2.put("admin", v0);
+        v2.put("quality", param.args[1]);
+        hookJson.put("Parameters", v2);
+        Logger.logHook(hookJson);
+    }
+	public static void logbeforegetInstalledPackages(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+		JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+		String v0_1="";
+		JSONObject v2 = new JSONObject();
+		String v3 = "flags";
+		if(param.args[0] != null) {
+			Object v0 = param.args[0];
+		}
+		else {
+			v0_1 = "";
+		}
+
+		v2.put(v3, v0_1);
+		hookJson.put("Parameters", v2);
+		Logger.logHook(hookJson);
+	}
+    public static void logaftergetRunningServices(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+        JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+        Object v0 = param.getResult();
+        ArrayList v1 = new ArrayList();
+        if(v0 != null) {
+            Iterator v2 = ((List)v0).iterator();
+            while(v2.hasNext()) {
+                v0 = v2.next();
+                if(((ActivityManager.RunningServiceInfo)v0).service != null && ("com.qiye.txz.qiyemon".equals(((ActivityManager.RunningServiceInfo)v0).service.getPackageName()))) {
+                    continue;
+                }
+
+                ((List)v1).add(v0);
+            }
+        }
+
+        param.setResult(v1);
+    }
+    public static void logbeforegetRunningServices(MethodHookParam param, boolean mThisObject, String mType) throws JSONException {
+        JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
+        JSONObject v1 = new JSONObject();
+        v1.put("maxNum", param.args[0]);
+        hookJson.put("Parameters", v1);
+        Logger.logHook(hookJson);
+    }
 	public static void logTraceReflectionMethod(MethodHookParam param, String mType) throws JSONException {
 		JSONObject hookJson = ParseGeneratorNotype.generateHookDataJson(param,mType);
 		

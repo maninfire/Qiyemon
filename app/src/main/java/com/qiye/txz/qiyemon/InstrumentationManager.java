@@ -119,6 +119,7 @@ public class InstrumentationManager implements IXposedHookLoadPackage, IXposedHo
         InstrumentationConfiguration instrumentationConfiguration = gson.fromJson(json, InstrumentationConfiguration.class);
         TRACE=instrumentationConfiguration.trace;
         for (HookConfig hookConfig : instrumentationConfiguration.hookConfigs) {
+
             hook(new MethodHookImpl(hookConfig.class_name,hookConfig.method,hookConfig.thisObject,hookConfig.type));
         }
         //hookextra(new HKequals("java.lang.String","equals",true,"equals"));
